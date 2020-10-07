@@ -10,7 +10,7 @@
 </a>
 
 ### Hello there, I'm [urienix](https://urienix.github.io) :clap:
-#### Website: [urienix.moe](https://urienix.moe)
+#### Website: [urienix.moe](https://urienix.github.io/urienix)
 ---
 
 <div align="center">
