@@ -15,7 +15,7 @@
 
 <div align="center">
 
-### I'm a softwarte developer and Open Source lover, I like to code with cookies :cookie: and coffee :coffee:
+### I'm a software developer and Open Source lover, I like to code with cookies :cookie: and coffee :coffee:
 
 #### I :heart: linux
 <img src="https://raw.githubusercontent.com/urienix/urienix/master/assets/linux.png"></img>
