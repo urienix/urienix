@@ -9,8 +9,8 @@
   <img align="right" alt="Urienix' Instagram" width="35px" src="https://raw.githubusercontent.com/urienix/urienix/master/assets/instagram.png" />
 </a>
 
-### Hello there, I'm [urienix](https://urienix.moe) :clap:
-#### Website: [urienix.moe](https://urienix.moe)
+### Hello there, I'm Urienix :clap:
+#### My website: [urienix.moe](https://urienix.moe)
 ---
 
 <div align="center">
