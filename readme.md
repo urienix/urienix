@@ -54,3 +54,6 @@
 <!-- I want to put something here :') I hope
 #### Projects in which I have contributed
 -->
+
+#### DailyDevCard
+<a href="https://app.daily.dev/urienix"><img src="https://api.daily.dev/devcards/75725ff550cd4561b16e04ffe6cb4d09.png?r=fvc" width="400" alt="urienix's Dev Card"/></a>
