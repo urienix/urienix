@@ -56,4 +56,6 @@
 -->
 
 #### DailyDevCard
-<a href="https://app.daily.dev/urienix"><img src="https://api.daily.dev/devcards/75725ff550cd4561b16e04ffe6cb4d09.png?r=fvc" width="400" alt="urienix's Dev Card"/></a>
+<div align="center">
+<a href="https://app.daily.dev/urienix"><img src="https://api.daily.dev/devcards/75725ff550cd4561b16e04ffe6cb4d09.png?r=fvc" width="300" alt="urienix's Dev Card"/></a>
+</div>
