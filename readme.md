@@ -32,8 +32,8 @@
 #### Some technologies that I'm learning
 <img src="https://raw.githubusercontent.com/urienix/urienix/master/assets/git.png"></img>
 <img src="https://raw.githubusercontent.com/urienix/urienix/master/assets/ts.png"></img>
-<img src="https://raw.githubusercontent.com/urienix/urienix/master/assets/react.png"></img>
-<img src="https://raw.githubusercontent.com/urienix/urienix/master/assets/python.png"></img>
+<!-- <img src="https://raw.githubusercontent.com/urienix/urienix/master/assets/react.png"></img>-->
+<!-- <img src="https://raw.githubusercontent.com/urienix/urienix/master/assets/python.png"></img>-->
 <img src="https://raw.githubusercontent.com/urienix/urienix/master/assets/docker.png"></img>
 
 #### My GitHub Stats 
