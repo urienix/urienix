@@ -1,11 +1,11 @@
 
-<a href="https://t.me/urienix">
+<a href="https://t.me/urienix" target="_blank">
   <img align="right" alt="Urienix | Telegram" width="35px" src="https://raw.githubusercontent.com/urienix/urienix/master/assets/telegram.png" />
 </a>
-<a href="https://twitter.com/urienix">
+<a href="https://twitter.com/urienix" target="_blank">
   <img align="right" alt="Urienix | Twitter" width="35px" src="https://raw.githubusercontent.com/urienix/urienix/master/assets/twitter.png" />
 </a>
-<a href="https://www.instagram.com/urienix">
+<a href="https://www.instagram.com/urienix" target="_blank">
   <img align="right" alt="Urienix' Instagram" width="35px" src="https://raw.githubusercontent.com/urienix/urienix/master/assets/instagram.png" />
 </a>
 
