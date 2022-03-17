@@ -22,19 +22,15 @@
 
 #### Some technologies that I use
 
-<img src="https://raw.githubusercontent.com/urienix/urienix/master/assets/html.png"></img>
-<img src="https://raw.githubusercontent.com/urienix/urienix/master/assets/css.png"></img>
-<img src="https://raw.githubusercontent.com/urienix/urienix/master/assets/js.png"></img>
-<img src="https://raw.githubusercontent.com/urienix/urienix/master/assets/node.png"></img>
-<img src="https://raw.githubusercontent.com/urienix/urienix/master/assets/c%2B%2B.png"></img>
-<img src="https://raw.githubusercontent.com/urienix/urienix/master/assets/java.png"></img>
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=html,css,js,nodejs,cpp,java" />
+</p>
 
 #### Some technologies that I'm learning
-<img src="https://raw.githubusercontent.com/urienix/urienix/master/assets/git.png"></img>
-<img src="https://raw.githubusercontent.com/urienix/urienix/master/assets/ts.png"></img>
-<!-- <img src="https://raw.githubusercontent.com/urienix/urienix/master/assets/react.png"></img>-->
-<!-- <img src="https://raw.githubusercontent.com/urienix/urienix/master/assets/python.png"></img>-->
-<img src="https://raw.githubusercontent.com/urienix/urienix/master/assets/docker.png"></img>
+
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=git,docker,deno,py,ts" />
+</p>
 
 #### My GitHub Stats 
 
