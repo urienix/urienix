@@ -172,3 +172,16 @@ a {
         transform: scale(1.1);
     }
 }
+
+
+.border-cyan{
+    border-color: #afeeee;
+    border-style: solid;
+    border-width: 4px;
+    border-radius: 25px;
+}
+
+.image-box{
+    border-top-left-radius: 21px;
+    border-top-right-radius: 21px;
+}
