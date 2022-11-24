@@ -174,8 +174,8 @@ a {
 }
 
 
-.border-cyan{
-    border-color: #afeeee;
+.border-purple{
+    border-color: #9580FF;
     border-style: solid;
     border-width: 4px;
     border-radius: 25px;
@@ -184,4 +184,14 @@ a {
 .image-box{
     border-top-left-radius: 21px;
     border-top-right-radius: 21px;
+}
+
+.works-pictures{
+    height: 200px; 
+    object-fit: scale-down;
+}
+
+.content-text-box{
+    height: 125px; 
+    object-fit: scale-down;
 }
