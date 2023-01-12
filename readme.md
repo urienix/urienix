@@ -57,7 +57,7 @@
 
 #### My GitHub Stats 
 
-![urienix' github stats](https://github-readme-stats.vercel.app/api?username=urienix&show_icons=true&theme=dracula)
+![urienix' github stats](https://github-readme-stats-git-masterrstaa-rickstaa.vercel.app/api?username=urienix&show_icons=true&theme=dracula)
 
 <br>
 
