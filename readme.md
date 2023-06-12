@@ -42,7 +42,7 @@
 #### Some technologies that interest me
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=kubernetes,rust,godot" />
+  <img src="https://skillicons.dev/icons?i=kubernetes,rust,godot,unity" />
 </p>
 
 <br/>
