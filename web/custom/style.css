@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+html{
+    background-color: #14141B;
+    overflow-x: hidden;
+}
+
+*{
+    font-family: 'Roboto', monospace !important;
+}
+
+.drac-bg-dark{
+    background-color: #14141B !important;
+}
+
+.logo{
+    width: 100px;
+    height: 100px;
+}
+
+.h-100{
+    min-height: 100vh !important;
+}
+
+.h-50{
+    min-height: 50vh !important;
+}
+
+.glow-box {
+    box-shadow: 0 0 20px 3px rgba(149, 128, 255, 0.7);
+    animation: glow-animation 8s infinite;
+}
+
+@keyframes glow-animation {
+    0% {
+        box-shadow: 0 0 20px 3px rgba(149, 128, 255, 0.7);
+    }
+    25% {
+        box-shadow: 0 0 20px 3px rgba(128, 255, 234, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 20px 3px rgba(138, 255, 128, 0.7); 
+    }
+    75% {
+        box-shadow: 0 0 20px 3px rgba(255, 202, 128, 0.7); 
+    }
+    100% {
+        box-shadow: 0 0 20px 3px rgba(149, 128, 255, 0.7);
+    }
+}
+
+.mh-150{
+    max-height: 150px;
+}
+
+.mh-90vh{
+    min-height: 90vh;
+}
+
+.border-purple{
+    border-color: #9580FF;
+    border-style: solid;
+    border-width: 4px;
+    border-radius: 25px;
+}
+
+.image-box{
+    border-top-left-radius: 21px;
+    border-top-right-radius: 21px;
+}
+
+.works-pictures{
+    height: 200px; 
+    object-fit: scale-down;
+}
+
+.content-text-box{
+    height: 125px; 
+    object-fit: scale-down;
+}
+
+.social-network {
+    font-size: 22px;
+    padding: 4px;
+}
