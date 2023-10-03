@@ -61,6 +61,11 @@
 
 <br>
 
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=urienix&layout=compact&theme=dracula&show)
+
+
+<br>
+
 ### [Do you want to ask me something :question:](https://github.com/urienix/urienix/issues)
 
 <br>
