@@ -22,8 +22,32 @@ html{
     min-height: 100vh !important;
 }
 
+.h-70{
+    min-height: 70vh !important;
+}
+
 .h-50{
     min-height: 50vh !important;
+}
+
+.h-30{
+    min-height: 30vh !important;
+}
+
+.h-25{
+    min-height: 25vh !important;
+}
+
+.h-20{
+    min-height: 20vh !important;
+}
+
+.h-10{
+    min-height: 10vh !important;
+}
+
+.h-5{
+    min-height: 5vh !important;
 }
 
 .glow-box {
