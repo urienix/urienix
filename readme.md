@@ -1,7 +1,4 @@
 
-<a href="https://t.me/urienix" target="_blank">
-  <img align="right" alt="Urienix | Telegram" width="35px" src="https://raw.githubusercontent.com/urienix/urienix/master/assets/telegram.png" />
-</a>
 <a href="https://twitter.com/urienix" target="_blank">
   <img align="right" alt="Urienix | Twitter" width="35px" src="https://raw.githubusercontent.com/urienix/urienix/master/assets/twitter.png" />
 </a>
@@ -25,24 +22,27 @@
 #### Some technologies that I use
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=html,css,js,bootstrap,nodejs,cpp,java" />
+  <img src="https://skillicons.dev/icons?i=html,css,js,bootstrap,nodejs" />
 </p>
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=mysql,postgres,mongodb,electron,express,bash,md" />
+  <img src="https://skillicons.dev/icons?i=express,babel,bash,mysql,mongo" />
+</p>
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=nginx,electron,md,github,git" />
 </p>
 <br/>
 
 #### Some technologies that I'm learning
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=git,docker,py,ts" />
+  <img src="https://skillicons.dev/icons?i=vue,nuxtjs,nestjs" />
 </p>
 <br/>
 
 #### Some technologies that interest me
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=kubernetes,rust,godot,unity" />
+  <img src="https://skillicons.dev/icons?i=rust,godot,unity" />
 </p>
 
 <br/>
