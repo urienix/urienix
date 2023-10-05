@@ -143,3 +143,9 @@ html{
 .delay-800{
     transition-delay: 800ms;
 }
+
+@media screen and (max-width: 768px) { /* Ajusta el tamaño máximo según sea necesario */
+    .from-right {
+        transform: translateX(0); /* Otra transformación o valor aquí */
+    }
+}
