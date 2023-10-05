@@ -13,6 +13,13 @@ html{
     background-color: #14141B !important;
 }
 
+.drac-bg-gradient{
+    background-image: linear-gradient(176deg, rgb(20, 20, 27) 50%, rgb(32, 39, 55) 100%);
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
 .logo{
     width: 100px;
     height: 100px;
@@ -94,4 +101,45 @@ html{
 .social-network {
     font-size: 22px;
     padding: 4px;
+}
+
+.from-left{
+    transform: translateX(-200px);
+}
+
+.from-right{
+    transform: translateX(200px);
+}
+
+.from-up{
+    transform: translateY(-200px);
+}
+
+.from-down{
+    transform: translateY(200px);
+}
+
+.animated{
+    opacity: 0;
+    filter: blur(5px);
+    transition: all 1s;
+    transition-delay: 200ms;
+}
+
+.show-animation{
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateX(0%);
+}
+
+.delay-400{
+    transition-delay: 400ms;
+}
+
+.delay-600{
+    transition-delay: 600ms;
+}
+
+.delay-800{
+    transition-delay: 800ms;
 }

@@ -131,3 +131,18 @@ const config = { attributes: true, childList: true, subtree: true };
 
 // Iniciar la observación del elemento
 observer.observe(termynalElem, config);
+
+
+// ############################ SCRIPT FOR VISIBLE ELEMENTS ANIMATIONS ############################
+const animationsObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("show-animation");
+        }else{
+            entry.target.classList.remove("show-animation");
+        }
+    });
+});
+
+const elementsToAnimate = document.querySelectorAll(".animated");
+elementsToAnimate.forEach((element) => animationsObserver.observe(element));
