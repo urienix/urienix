@@ -136,11 +136,17 @@ observer.observe(termynalElem, config);
 // ############################ SCRIPT FOR VISIBLE ELEMENTS ANIMATIONS ############################
 const animationsObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
+        // This enable animation only the first time the element is visible
+        if (entry.isIntersecting) {
+            entry.target.classList.add("show-animation");
+        }
+        /* This enable animation every time the element is visible 
         if (entry.isIntersecting) {
             entry.target.classList.add("show-animation");
         }else{
             entry.target.classList.remove("show-animation");
         }
+        */
     });
 });
 
