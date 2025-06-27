@@ -102,11 +102,6 @@
           <a href="https://app.daily.dev/urienix"><img src="https://api.daily.dev/devcards/75725ff550cd4561b16e04ffe6cb4d09.png?r=hes" width="280" alt="urienix's Dev Card"/></a>
         </td>
       </tr>
-      <tr>
-        <td>
-          <img src="https://github-readme-stats-git-masterrstaa-rickstaa.vercel.app/api?username=urienix&show_icons=true&theme=dracula" />
-        </td>
-      </tr>
     </tbody>
   </table>
 </div>
