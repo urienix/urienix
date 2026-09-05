@@ -70,11 +70,11 @@ I'm **Jairo Medrano**, a full-stack Software Engineer with **7+ years** of exper
 </p>
 
 <p align="center">
-  <a href="https://github.com/urienix?tab=repositories"><img alt="Top languages Urienix uses on GitHub" src="https://github-readme-stats.vercel.app/api/top-langs/?username=urienix&layout=compact&theme=dracula&hide_border=true&langs_count=8&cache_seconds=86400" /></a>
-  <a href="https://github.com/urienix"><img alt="Urienix's GitHub stats card" src="https://github-readme-stats.vercel.app/api?username=urienix&show_icons=true&theme=dracula&hide_border=true&count_private=true&cache_seconds=86400" /></a>
+  <a href="https://gist.github.com/urienix"><img alt="Public gists" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.github.com%2Fusers%2Furienix&query=%24.public_gists&style=for-the-badge&labelColor=282A36&color=80FFEA&logo=github&logoColor=F8F8F2&label=GISTS"></a>
+  <a href="https://github.com/urienix"><img alt="On GitHub since 2016" src="https://img.shields.io/badge/SINCE-2016-BD93F9?style=for-the-badge&labelColor=282A36&logo=github&logoColor=F8F8F2"></a>
+  <a href="https://github.com/urienix"><img alt="Location" src="https://img.shields.io/badge/HN-Tegucigalpa-F1FA8C?style=for-the-badge&labelColor=282A36&logo=googlemaps&logoColor=F8F8F2"></a>
+  <a href="mailto:urienix@hotmail.com"><img alt="Open to opportunities" src="https://img.shields.io/badge/HIRE_ME-open-8AFF80?style=for-the-badge&labelColor=282A36&logo=maildotru&logoColor=F8F8F2"></a>
 </p>
-
-<sub align="center"><i>Cards courtesy of <a href="https://github.com/anuraghazra/github-readme-stats">github-readme-stats</a>. Occasionally rate-limited by GitHub, in which case the badges above still tell the story.</i></sub>
 
 ---
 
