@@ -13,11 +13,11 @@ window.URIENIX_DATA = {
       },
       company: 'Higher Honduras',
       product: {
-        en: 'Whole Bible Community — social platform',
-        es: 'Whole Bible Community — plataforma social',
+        en: 'Whole Bible Community · social platform',
+        es: 'Whole Bible Community · plataforma social',
       },
       location: { en: 'Tegucigalpa, HN', es: 'Tegucigalpa, HN' },
-      dates:    { en: 'Jul 2025 — Present', es: 'Jul 2025 — Actualidad' },
+      dates:    { en: 'Jul 2025 - Present', es: 'Jul 2025 - Actualidad' },
       current:  true,
       tags: ['NestJS', 'MongoDB', 'Flutter', 'FFmpeg', 'RabbitMQ', 'AWS'],
       highlights: {
@@ -47,7 +47,7 @@ window.URIENIX_DATA = {
         es: 'Plataforma de gestión de reservas',
       },
       location: { en: 'USA · Remote', es: 'EE. UU. · Remoto' },
-      dates:    { en: 'Feb 2024 — Jan 2026', es: 'Feb 2024 — Ene 2026' },
+      dates:    { en: 'Feb 2024 - Jan 2026', es: 'Feb 2024 - Ene 2026' },
       remote:   true,
       tags: ['Node.js', 'React', 'MySQL', 'AWS S3'],
       highlights: {
@@ -75,7 +75,7 @@ window.URIENIX_DATA = {
         es: 'Plataformas de logística y rastreo vehicular (Mantun GPS, Smart Driver)',
       },
       location: { en: 'Tegucigalpa, HN', es: 'Tegucigalpa, HN' },
-      dates:    { en: 'Oct 2020 — Mar 2024', es: 'Oct 2020 — Mar 2024' },
+      dates:    { en: 'Oct 2020 - Mar 2024', es: 'Oct 2020 - Mar 2024' },
       tags: ['Node.js', 'Express', 'MySQL', 'Google Maps', 'TCP Sockets'],
       highlights: {
         en: [
@@ -100,11 +100,11 @@ window.URIENIX_DATA = {
       },
       company: 'Moore Honduras',
       product: {
-        en: 'VirtualMooreHN — evaluation platform',
-        es: 'VirtualMooreHN — plataforma de evaluaciones',
+        en: 'VirtualMooreHN · evaluation platform',
+        es: 'VirtualMooreHN · plataforma de evaluaciones',
       },
       location: { en: 'Tegucigalpa, HN', es: 'Tegucigalpa, HN' },
-      dates:    { en: 'Jun 2021 — Feb 2024', es: 'Jun 2021 — Feb 2024' },
+      dates:    { en: 'Jun 2021 - Feb 2024', es: 'Jun 2021 - Feb 2024' },
       tags: ['Moodle', 'PHP', 'Linux', 'Nginx'],
       highlights: {
         en: [
@@ -131,7 +131,7 @@ window.URIENIX_DATA = {
         es: 'Servicios de correo y almacenamiento en la nube',
       },
       location: { en: 'San Pedro Sula, HN', es: 'San Pedro Sula, HN' },
-      dates:    { en: 'Jun 2021 — Present', es: 'Jun 2021 — Actualidad' },
+      dates:    { en: 'Jun 2021 - Present', es: 'Jun 2021 - Actualidad' },
       current:  true,
       tags: ['Google Workspace', 'DNS', 'SSL'],
       highlights: {
@@ -167,8 +167,8 @@ window.URIENIX_DATA = {
       name: 'The Coin Room',
       img: 'assets/img/coinroom.png',
       desc: {
-        en: 'Real-time chat playground built on socket.io — small, fast, and unashamedly fun.',
-        es: 'Chat en tiempo real hecho sobre socket.io — pequeño, rápido y divertido sin pena.',
+        en: 'Real-time chat playground built on socket.io. Small, fast, and unashamedly fun.',
+        es: 'Chat en tiempo real hecho sobre socket.io. Pequeño, rápido y divertido sin pena.',
       },
       tags: ['Node.js', 'Socket.io'],
       href: 'https://coinroom.urienix.moe',
@@ -191,8 +191,8 @@ window.URIENIX_DATA = {
       name: 'crypter-text',
       img: 'assets/img/crypter-text.png',
       desc: {
-        en: 'Small keyword-based text encryption utility — perfect for password notes.',
-        es: 'Utilidad pequeña de cifrado de texto por palabra clave — ideal para notas de contraseñas.',
+        en: 'Small keyword-based text encryption utility, perfect for password notes.',
+        es: 'Utilidad pequeña de cifrado de texto por palabra clave, ideal para notas de contraseñas.',
       },
       tags: ['Node.js', 'CLI', 'npm'],
       href: 'https://www.npmjs.com/package/crypter-text',

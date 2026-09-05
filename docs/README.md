@@ -1,6 +1,6 @@
 # urienix.moe
 
-Personal website of Jairo Medrano (Urienix) — vanilla HTML, CSS and JavaScript
+Personal website of Jairo Medrano (Urienix): vanilla HTML, CSS and JavaScript
 with Tailwind (via CDN). No bundler, no framework, no build step.
 
 ## Layout
@@ -31,11 +31,11 @@ python3 -m http.server 8000
 
 ## Editing content
 
-- Career and projects live in `assets/js/data.js` — pure JS objects, bilingual.
-- Copy in `assets/js/i18n.js` — one flat dictionary per language.
+- Career and projects live in `assets/js/data.js`: pure JS objects, bilingual.
+- Copy in `assets/js/i18n.js`: one flat dictionary per language.
 - Colors and typography in `:root` inside `assets/css/style.css`.
 
 ## Deploy
 
 The `CNAME` file points at **urienix.moe**. GitHub Pages serves this repo
-from `main:/docs` — pushing to `main` publishes.
+from `main:/docs`, so pushing to `main` publishes.

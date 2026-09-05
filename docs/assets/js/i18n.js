@@ -6,7 +6,7 @@
 window.URIENIX_I18N = {
   en: {
     'html.lang':        'en',
-    'doc.title':        'Urienix — Jairo Medrano · Software Engineer',
+    'doc.title':        'Urienix · Jairo Medrano · Software Engineer',
     'meta.description': 'Personal site of Jairo Medrano (Urienix): full-stack software engineer focused on backend, cloud and distributed systems.',
 
     'nav.about':    'About',
@@ -18,7 +18,7 @@ window.URIENIX_I18N = {
     'tools.crt':    'Toggle CRT effect',
 
     'hero.role':   'Software Engineer',
-    'hero.line1':  "Hi! I'm Jairo Medrano — also known as Urienix.",
+    'hero.line1':  "Hi! I'm Jairo Medrano, also known as Urienix.",
     'hero.line2':  'Full-stack software engineer, backend & cloud enthusiast.',
     'hero.line3':  'Building things with Node.js, TypeScript, React and Flutter.',
     'hero.line4':  'Powered by coffee ☕ and pancakes 🥞.',
@@ -29,9 +29,9 @@ window.URIENIX_I18N = {
     'about.kicker':   '// who is behind the keyboard',
     'about.bio.title':'The short version',
     'about.bio.p1':   "I'm a full-stack software engineer with <strong>7+ years</strong> designing and shipping web, mobile and cloud-based products. I specialize in <strong>Node.js</strong>, <strong>TypeScript</strong>, <strong>React</strong>, <strong>Flutter</strong>, <strong>MongoDB</strong> and <strong>AWS/DigitalOcean</strong>.",
-    'about.bio.p2':   "I care about backend architecture, integrations, automation and performance — and I lean on AI-assisted workflows every day to move faster without cutting corners on quality.",
+    'about.bio.p2':   "I care about backend architecture, integrations, automation and performance, and I lean on AI-assisted workflows every day to move faster without cutting corners on quality.",
     'about.now.title':"What I'm on right now",
-    'about.now.item1':"Building <strong>Whole Bible Community</strong> @ Higher Honduras — social platform for web + mobile.",
+    'about.now.item1':"Building <strong>Whole Bible Community</strong> @ Higher Honduras · social platform for web + mobile.",
     'about.now.item2':"Real-time messaging, media processing (FFmpeg, RabbitMQ) and content delivery.",
     'about.now.item3':"Publishing releases to Apple App Store and Google Play.",
     'about.now.item4':"Improving my English (B2) and my Rust 🦀.",
@@ -54,7 +54,7 @@ window.URIENIX_I18N = {
     'skills.lang.title':  'Languages',
     'skills.lang.note':   'TypeScript & JavaScript are home. Dart for Flutter. The rest for reach.',
     'skills.back.title':  'Backend & Runtime',
-    'skills.back.note':   'Building REST & realtime services on Node.js — NestJS & Express.',
+    'skills.back.note':   'Building REST & realtime services on Node.js. NestJS & Express.',
     'skills.front.title': 'Frontend & Mobile',
     'skills.front.note':  'React on the web. Flutter for cross-platform mobile.',
     'skills.data.title':  'Data & Storage',
@@ -62,7 +62,7 @@ window.URIENIX_I18N = {
     'skills.cloud.title': 'Cloud & DevOps',
     'skills.cloud.note':  'AWS & DigitalOcean daily. Docker, Nginx and plain GNU/Linux boxes.',
     'skills.tools.title': 'Tooling & AI',
-    'skills.tools.note':  'Git-first workflow. AI-assisted (Codex, Claude, Copilot) — CLI & IDE.',
+    'skills.tools.note':  'Git-first workflow. AI-assisted (Codex, Claude, Copilot) across CLI & IDE.',
 
     'projects.title':  'Projects',
     'projects.kicker': '// selected work & side quests',
@@ -82,7 +82,7 @@ window.URIENIX_I18N = {
 
   es: {
     'html.lang':        'es',
-    'doc.title':        'Urienix — Jairo Medrano · Ingeniero de Software',
+    'doc.title':        'Urienix · Jairo Medrano · Ingeniero de Software',
     'meta.description': 'Sitio personal de Jairo Medrano (Urienix): ingeniero de software full-stack enfocado en backend, cloud y sistemas distribuidos.',
 
     'nav.about':    'Sobre mí',
@@ -94,7 +94,7 @@ window.URIENIX_I18N = {
     'tools.crt':    'Activar efecto CRT',
 
     'hero.role':   'Ingeniero de Software',
-    'hero.line1':  '¡Hola! Soy Jairo Medrano — también conocido como Urienix.',
+    'hero.line1':  '¡Hola! Soy Jairo Medrano, también conocido como Urienix.',
     'hero.line2':  'Ingeniero de software full-stack, entusiasta del backend y la nube.',
     'hero.line3':  'Construyo cosas con Node.js, TypeScript, React y Flutter.',
     'hero.line4':  'Alimentado por café ☕ y panqueques 🥞.',
@@ -105,9 +105,9 @@ window.URIENIX_I18N = {
     'about.kicker':   '// quién hay tras el teclado',
     'about.bio.title':'Versión corta',
     'about.bio.p1':   "Soy ingeniero de software full-stack con <strong>+7 años</strong> diseñando y lanzando productos web, móviles y en la nube. Me especializo en <strong>Node.js</strong>, <strong>TypeScript</strong>, <strong>React</strong>, <strong>Flutter</strong>, <strong>MongoDB</strong> y <strong>AWS/DigitalOcean</strong>.",
-    'about.bio.p2':   "Me importan la arquitectura backend, las integraciones, la automatización y el rendimiento — y uso flujos asistidos por IA a diario para ir más rápido sin sacrificar calidad.",
+    'about.bio.p2':   "Me importan la arquitectura backend, las integraciones, la automatización y el rendimiento, y uso flujos asistidos por IA a diario para ir más rápido sin sacrificar calidad.",
     'about.now.title':'En lo que estoy ahora',
-    'about.now.item1':"Construyendo <strong>Whole Bible Community</strong> en Higher Honduras — plataforma social web + móvil.",
+    'about.now.item1':"Construyendo <strong>Whole Bible Community</strong> en Higher Honduras · plataforma social web + móvil.",
     'about.now.item2':"Mensajería en tiempo real, procesamiento multimedia (FFmpeg, RabbitMQ) y distribución de contenido.",
     'about.now.item3':"Publicando releases en Apple App Store y Google Play.",
     'about.now.item4':"Mejorando mi inglés (B2) y mi Rust 🦀.",
@@ -130,7 +130,7 @@ window.URIENIX_I18N = {
     'skills.lang.title':  'Lenguajes',
     'skills.lang.note':   'TypeScript y JavaScript son casa. Dart para Flutter. El resto para alcance.',
     'skills.back.title':  'Backend y runtime',
-    'skills.back.note':   'REST y servicios en tiempo real sobre Node.js — NestJS y Express.',
+    'skills.back.note':   'REST y servicios en tiempo real sobre Node.js. NestJS y Express.',
     'skills.front.title': 'Frontend y móvil',
     'skills.front.note':  'React para web. Flutter para móvil multiplataforma.',
     'skills.data.title':  'Datos y almacenamiento',
@@ -138,7 +138,7 @@ window.URIENIX_I18N = {
     'skills.cloud.title': 'Cloud y DevOps',
     'skills.cloud.note':  'AWS y DigitalOcean a diario. Docker, Nginx y máquinas GNU/Linux al desnudo.',
     'skills.tools.title': 'Tooling e IA',
-    'skills.tools.note':  'Git primero. IA asistida (Codex, Claude, Copilot) — CLI e IDE.',
+    'skills.tools.note':  'Git primero. IA asistida (Codex, Claude, Copilot) en CLI e IDE.',
 
     'projects.title':  'Proyectos',
     'projects.kicker': '// trabajos seleccionados y misiones secundarias',
