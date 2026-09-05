@@ -63,9 +63,18 @@ I'm **Jairo Medrano**, a full-stack Software Engineer with **7+ years** of exper
 ### 📊 A few stats
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=urienix&layout=compact&theme=dracula&hide_border=true&langs_count=8" />
-  <img src="https://github-readme-stats.vercel.app/api?username=urienix&show_icons=true&theme=dracula&hide_border=true&count_private=true" />
+  <a href="https://github.com/urienix?tab=followers"><img alt="Followers" src="https://img.shields.io/github/followers/urienix?style=for-the-badge&labelColor=282A36&color=BD93F9&logo=github&logoColor=F8F8F2&label=FOLLOWERS"></a>
+  <a href="https://github.com/urienix?tab=stars"><img alt="Stars" src="https://img.shields.io/github/stars/urienix?style=for-the-badge&labelColor=282A36&color=F1FA8C&logo=starship&logoColor=F8F8F2&label=STARS"></a>
+  <a href="https://github.com/urienix?tab=repositories"><img alt="Public repositories" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.github.com%2Fusers%2Furienix&query=%24.public_repos&style=for-the-badge&labelColor=282A36&color=8AFF80&logo=git&logoColor=F8F8F2&label=REPOS"></a>
+  <a href="https://urienix.moe"><img alt="Profile views" src="https://komarev.com/ghpvc/?username=urienix&style=for-the-badge&color=FF80BF&labelColor=282A36&label=VIEWS"></a>
 </p>
+
+<p align="center">
+  <a href="https://github.com/urienix?tab=repositories"><img alt="Top languages Urienix uses on GitHub" src="https://github-readme-stats.vercel.app/api/top-langs/?username=urienix&layout=compact&theme=dracula&hide_border=true&langs_count=8&cache_seconds=86400" /></a>
+  <a href="https://github.com/urienix"><img alt="Urienix's GitHub stats card" src="https://github-readme-stats.vercel.app/api?username=urienix&show_icons=true&theme=dracula&hide_border=true&count_private=true&cache_seconds=86400" /></a>
+</p>
+
+<sub align="center"><i>Cards courtesy of <a href="https://github.com/anuraghazra/github-readme-stats">github-readme-stats</a>. Occasionally rate-limited by GitHub, in which case the badges above still tell the story.</i></sub>
 
 ---
 
