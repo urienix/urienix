@@ -1,123 +1,75 @@
+<h1 align="center">
+  Hey there, I'm <a href="https://urienix.moe" target="_blank">Urienix</a>
+  <img src="https://raw.githubusercontent.com/urienix/urienix/master/assets/urienix.png" width="28" align="right" alt="urienix" />
+</h1>
 
-<a href="https://twitter.com/urienix" target="_blank">
-  <img align="right" alt="Urienix | Twitter" width="35px" src="https://raw.githubusercontent.com/urienix/urienix/master/assets/twitter.png" />
-</a>
-<a href="https://www.instagram.com/urienix" target="_blank">
-  <img align="right" alt="Urienix' Instagram" width="35px" src="https://raw.githubusercontent.com/urienix/urienix/master/assets/instagram.png" />
-</a>
+<p align="center">
+  <em>Software Engineer · Backend &amp; Cloud · Node.js · TypeScript · AWS · DigitalOcean</em><br/>
+  <sub>Programming with heart &amp; coffee ☕ · Based in Tegucigalpa, Honduras 🇭🇳</sub>
+</p>
 
-## Hello there, I'm Urienix :clap:
-#### My website: [urienix.moe](https://urienix.moe)
+<p align="center">
+  <a href="https://urienix.moe"><img alt="Website" src="https://img.shields.io/badge/urienix.moe-14141B?style=for-the-badge&labelColor=BD93F9&logo=firefox&logoColor=white"></a>
+  <a href="mailto:urienix@hotmail.com"><img alt="Email" src="https://img.shields.io/badge/urienix@hotmail.com-14141B?style=for-the-badge&labelColor=FF80BF&logo=maildotru&logoColor=white"></a>
+  <a href="https://www.linkedin.com/in/urienix"><img alt="LinkedIn" src="https://img.shields.io/badge/in/urienix-14141B?style=for-the-badge&labelColor=80FFEA&logo=linkedin&logoColor=white"></a>
+  <a href="https://x.com/urienix"><img alt="X" src="https://img.shields.io/badge/@urienix-14141B?style=for-the-badge&labelColor=F1FA8C&logo=x&logoColor=black"></a>
+</p>
+
 ---
 
-<table style="border: none;">
-  <tr>
-    <td>
-      <img src="https://raw.githubusercontent.com/urienix/urienix/master/assets/urienix.png" width="300px">
-    </td>
-    <td>
-      <samp>
-        I am a software developer and open-source enthusiast. I enjoy coding with pancakes :pancakes: and coffee :coffee:. Additionally, I have a deep love for chiptune, synthwave, classical, and epic music :headphones:.
-      </samp>
-    </td>
-    <td>
-      <img src="https://raw.githubusercontent.com/urienix/urienix/master/assets/linux.png" width="300px">
-    </td>
-</table>
+### 👨‍💻 About me
 
-<br/>
+I'm **Jairo Medrano**, a full-stack Software Engineer with **7+ years** of experience designing and building scalable **web, mobile and cloud-native applications**. I focus on backend, API architecture, distributed systems, automation, and shipping reliable software.
 
-<div align="center">
-  <table>
-    <thead align="center">
-      <th colspan="2">The Swiss Army knife of tools that I use</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          <samp>
-            Some of the tools that I use in my day to day life
-          </samp>
-        </td>
-        <td>
-          <p align="center">
-            <img src="https://skillicons.dev/icons?i=html,css,js,bootstrap,nodejs,express,babel,bash,mysql,mongo,nginx,electron,md,github,git,docker,aws,sequelize,gcp,ts&perline=5" /><br>
-          </p>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <samp>
-            Tools that I am learning
-          </samp>
-        </td>
-        <td>
-          <p align="center">
-            <img src="https://skillicons.dev/icons?i=vue,nuxtjs,nestjs&perline=5" />
-          </p>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <samp>
-            Technologies that interest me
-          </samp>
-        </td>
-        <td>
-          <p align="center">
-            <img src="https://skillicons.dev/icons?i=rust,godot,unity&perline=5" />
-          </p>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <samp>
-            Editors that I use
-          </samp>
-        </td>
-        <td>
-          <p align="center">
-            <img src="https://skillicons.dev/icons?i=vscode,vim&perline=5" />
-          </p>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+- 🔭 Currently building the social platform **Whole Bible Community** @ Higher Honduras (backend + mobile with Flutter).
+- 🧠 Leveraging **AI-assisted workflows** (Codex, Claude, Copilot) to accelerate delivery.
+- ☁️ Comfortable running things on **AWS**, **DigitalOcean**, Docker, Nginx and GNU/Linux boxes.
+- 🎧 Powered by chiptune, synthwave and classical music — and pancakes 🥞.
 
+---
 
-<br/>
+### 🧰 Tech I reach for
 
-<div align="center">
-  <table>
-    <thead>
-      <th colspan="2">Some stats</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td>          
-          <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=urienix&layout=compact&theme=dracula&show" />
-        </td>
-        <td rowspan="2">
-          <a href="https://app.daily.dev/urienix"><img src="https://api.daily.dev/devcards/75725ff550cd4561b16e04ffe6cb4d09.png?r=hes" width="280" alt="urienix's Dev Card"/></a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<p>
+  <img src="https://skillicons.dev/icons?i=ts,js,nodejs,nestjs,react,flutter,dart,mongodb,mysql,aws,docker,nginx,linux,git,github,bash,redis,rabbitmq&perline=9" />
+</p>
 
+<details>
+  <summary><b>Everything else</b></summary>
+  <br/>
+  <b>Languages:</b> TypeScript · JavaScript · PHP · C# · C++ · Java · Dart<br/>
+  <b>Databases:</b> MongoDB · DynamoDB · MySQL / MariaDB · MS SQL Server<br/>
+  <b>ORMs:</b> MikroORM · Sequelize · Mongoose · Dynamoose<br/>
+  <b>Cloud &amp; DevOps:</b> AWS (S3, Lambda, Cognito, SDK) · DigitalOcean · GCP · Vultr · Linode · Docker · Nginx · Apache · Certbot · Crontabs<br/>
+  <b>Realtime &amp; media:</b> Web/TCP Sockets · WebRTC · FFmpeg · RabbitMQ · Push notifications<br/>
+  <b>Auth:</b> AWS Cognito · JWT · OAuth<br/>
+  <b>Tooling:</b> Git · GitHub · GitLab · Bitbucket · Jira · Notion · VS Code · Vim
+</details>
 
+---
 
-<br>
+### 🚀 Featured work
 
-<div align="center">
-  <a href="https://github.com/urienix/urienix/issues" style="font-size: 22px; color: white; text-decoration: none;">Do you want to ask me something :question:</a>
-</div>
+| Project | What it is | Stack |
+| :-- | :-- | :-- |
+| **[Mantun GPS](https://mantungps.com)** | Fleet management &amp; vehicle tracking platform + REST API for mobile. | Node.js · Express · MySQL · Google Maps |
+| **[Whole Bible Community](https://wbcinfo.com)** | Cross-platform social platform (web + mobile). | NestJS · MongoDB · Flutter · FFmpeg · RabbitMQ |
+| **[db2storeprocedure](https://www.npmjs.com/package/db2storeprocedure)** | Promise-based helper to call IBM DB2 stored procedures from Node.js. | Node.js · IBM DB2 |
+| **[crypter-text](https://www.npmjs.com/package/crypter-text)** | Small keyword-based text encryption utility. | Node.js |
+| **[The Coin Room](https://coinroom.urienix.moe)** | Real-time chat playground built on socket.io. | Node.js · Socket.io |
 
-<br>
+---
 
-<div align="center">
-  <h3>You are visitor number</h3>
+### 📊 A few stats
 
-  ![Visitor Count](https://profile-counter.glitch.me/urienix/count.svg)
-</div>
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=urienix&layout=compact&theme=dracula&hide_border=true&langs_count=8" />
+  <img src="https://github-readme-stats.vercel.app/api?username=urienix&show_icons=true&theme=dracula&hide_border=true&count_private=true" />
+</p>
+
+---
+
+<p align="center">
+  <sub>Got a question or an idea? <a href="https://github.com/urienix/urienix/issues/new">Open an issue</a> · or say hi at <a href="mailto:urienix@hotmail.com">urienix@hotmail.com</a></sub><br/>
+  <img src="https://profile-counter.glitch.me/urienix/count.svg" alt="Visitor count" />
+</p>
