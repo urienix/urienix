@@ -6,7 +6,7 @@ with Tailwind (via CDN). No bundler, no framework, no build step.
 ## Layout
 
 ```
-website/
+docs/
 ├── index.html            single-page: home · about · career · skills · projects · contact
 ├── CNAME                 GitHub Pages domain (urienix.moe)
 ├── robots.txt
@@ -37,5 +37,5 @@ python3 -m http.server 8000
 
 ## Deploy
 
-The `CNAME` file points at **urienix.moe**. Serve `website/` as the root of a
-GitHub Pages branch/directory and DNS should do the rest.
+The `CNAME` file points at **urienix.moe**. GitHub Pages serves this repo
+from `main:/docs` — pushing to `main` publishes.

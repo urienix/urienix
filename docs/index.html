@@ -1,17 +1,344 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" data-lang="en">
 <head>
-  <meta charset="UTF-8">
-  <link rel="icon" href="/urienix.ico">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Urienix</title>
-  <script type="module" crossorigin src="/assets/index-CWVyqqh6.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-CYokafPB.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Urienix — Jairo Medrano · Software Engineer</title>
+
+  <meta name="description" data-i18n="meta.description"
+        content="Personal site of Jairo Medrano (Urienix): full-stack software engineer focused on backend, cloud and distributed systems." />
+  <meta name="author" content="Jairo Medrano" />
+  <meta name="theme-color" content="#14141B" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://urienix.moe/" />
+  <meta property="og:title" content="Urienix — Jairo Medrano" />
+  <meta property="og:description" content="Software engineer building web, mobile and cloud-native apps." />
+  <meta property="og:image" content="./assets/img/urienix.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:creator" content="@urienix" />
+  <meta name="twitter:title" content="Urienix — Jairo Medrano" />
+  <meta name="twitter:description" content="Software engineer building web, mobile and cloud-native apps." />
+  <meta name="twitter:image" content="./assets/img/urienix.png" />
+
+  <link rel="icon" type="image/x-icon" href="./favicon.ico" />
+  <link rel="apple-touch-icon" href="./assets/img/urienix.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Tailwind (CDN) with Dracula palette + pixel fonts -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink:    '#14141B',
+            panel:  '#1F1F2A',
+            surface:'#282A36',
+            edge:   '#44475A',
+            text:   '#F8F8F2',
+            muted:  '#B8B8C4',
+            cyan:   '#80FFEA',
+            green:  '#8AFF80',
+            yellow: '#F1FA8C',
+            pink:   '#FF80BF',
+            purple: '#BD93F9',
+            red:    '#FF5555',
+          },
+          fontFamily: {
+            pixel: ['"Press Start 2P"', 'monospace'],
+            mono:  ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+          },
+          boxShadow: {
+            glow:   '0 0 20px 3px rgba(189,147,249,0.35)',
+            pixel:  '4px 4px 0 rgba(189,147,249,0.35)',
+          },
+        },
+      },
+    };
+  </script>
+
+  <link rel="stylesheet" href="./assets/css/style.css" />
 </head>
 
-<body class="drac-bg-transparent crt">
-  <div id="app"></div>
-</body>
+<body class="bg-ink text-text font-mono antialiased">
 
+  <!-- Layered background -->
+  <div class="bg-layer bg-grid"      aria-hidden="true"></div>
+  <div class="bg-layer bg-glow"      aria-hidden="true"></div>
+  <div class="bg-layer bg-scanlines" aria-hidden="true"></div>
+  <div class="bg-layer" id="bubbles" aria-hidden="true"></div>
+
+  <!-- ============================= NAV ============================= -->
+  <header class="site-nav">
+    <a href="#home" class="brand" aria-label="Urienix — home">
+      <img src="./assets/img/urienix.png" alt="" width="28" height="28" class="brand-logo" />
+      <span class="brand-name">URIENIX<span class="brand-caret">_</span></span>
+    </a>
+
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#about"    data-i18n="nav.about">About</a>
+      <a href="#career"   data-i18n="nav.career">Career</a>
+      <a href="#skills"   data-i18n="nav.skills">Skills</a>
+      <a href="#projects" data-i18n="nav.projects">Projects</a>
+      <a href="#contact"  data-i18n="nav.contact">Contact</a>
+    </nav>
+
+    <div class="nav-tools">
+      <div class="lang-switch" role="group" aria-label="Language / Idioma">
+        <button type="button" class="lang-btn" data-set-lang="en" aria-pressed="true">EN</button>
+        <span class="lang-sep" aria-hidden="true">/</span>
+        <button type="button" class="lang-btn" data-set-lang="es" aria-pressed="false">ES</button>
+      </div>
+      <button type="button" id="crt-toggle" class="crt-toggle" aria-pressed="true"
+              title="CRT effect" data-i18n-title="tools.crt">
+        <span aria-hidden="true">CRT</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============================= HOME ============================= -->
+    <section id="home" class="section section-hero">
+      <div class="hero-inner">
+        <div class="hero-avatar-wrap">
+          <img src="./assets/img/urienix.png" alt="Urienix avatar" width="180" height="180" class="hero-avatar" />
+          <span class="avatar-ring" aria-hidden="true"></span>
+        </div>
+
+        <h1 class="hero-title" data-glitch="Jairo Medrano">Jairo Medrano</h1>
+        <p class="hero-role">
+          <span class="brk">[</span>
+          <span data-i18n="hero.role">Software Engineer</span>
+          <span class="brk">]</span>
+        </p>
+
+        <div class="terminal" role="region" aria-label="Terminal">
+          <div class="term-head">
+            <span class="term-dot term-dot--red"></span>
+            <span class="term-dot term-dot--yellow"></span>
+            <span class="term-dot term-dot--green"></span>
+            <span class="term-title">urienix@moe:~$</span>
+          </div>
+          <div class="term-body">
+            <p><span class="prompt">&gt;</span> <span data-i18n="hero.line1">Hi! I'm Jairo Medrano — also known as Urienix.</span></p>
+            <p><span class="prompt">&gt;</span> <span data-i18n="hero.line2">Full-stack software engineer, backend &amp; cloud enthusiast.</span></p>
+            <p><span class="prompt">&gt;</span> <span data-i18n="hero.line3">Building things with Node.js, TypeScript, React and Flutter.</span></p>
+            <p><span class="prompt">&gt;</span> <span data-i18n="hero.line4">Powered by coffee ☕ and pancakes 🥞.</span></p>
+            <p><span class="prompt">&gt;</span> <span data-i18n="hero.line5">Welcome to my little corner of the internet.</span><span class="caret" aria-hidden="true">_</span></p>
+          </div>
+        </div>
+
+        <ul class="socials" aria-label="Social links">
+          <li><a href="https://github.com/urienix"   target="_blank" rel="noopener" aria-label="GitHub">   <i class="ic ic-github"    aria-hidden="true"></i></a></li>
+          <li><a href="https://gitlab.com/urienix"   target="_blank" rel="noopener" aria-label="GitLab">   <i class="ic ic-gitlab"    aria-hidden="true"></i></a></li>
+          <li><a href="https://www.linkedin.com/in/urienix" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="ic ic-linkedin"  aria-hidden="true"></i></a></li>
+          <li><a href="https://x.com/urienix"        target="_blank" rel="noopener" aria-label="X (Twitter)"><i class="ic ic-x"          aria-hidden="true"></i></a></li>
+          <li><a href="https://www.instagram.com/urienix" target="_blank" rel="noopener" aria-label="Instagram"><i class="ic ic-instagram" aria-hidden="true"></i></a></li>
+          <li><a href="mailto:urienix@hotmail.com"   aria-label="Email"><i class="ic ic-mail" aria-hidden="true"></i></a></li>
+        </ul>
+
+        <a class="scroll-cue" href="#about" aria-label="Scroll to About">
+          <span data-i18n="hero.scroll">scroll</span>
+          <span class="cue-arrow" aria-hidden="true">▾</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============================= ABOUT ============================= -->
+    <section id="about" class="section">
+      <header class="section-head">
+        <h2 class="section-title" data-i18n="about.title">About</h2>
+        <p class="section-kicker" data-i18n="about.kicker">// who is behind the keyboard</p>
+      </header>
+
+      <div class="about-grid">
+        <article class="about-card">
+          <h3 class="about-h" data-i18n="about.bio.title">The short version</h3>
+          <p data-i18n="about.bio.p1">
+            I'm a full-stack software engineer with <strong>5+ years</strong> designing and shipping
+            web, mobile and cloud-based products. I specialize in <strong>Node.js</strong>,
+            <strong>TypeScript</strong>, <strong>React</strong>, <strong>Flutter</strong>,
+            <strong>MongoDB</strong> and <strong>AWS/DigitalOcean</strong>.
+          </p>
+          <p data-i18n="about.bio.p2">
+            I care about backend architecture, integrations, automation and performance —
+            and I lean on AI-assisted workflows every day to move faster without cutting
+            corners on quality.
+          </p>
+        </article>
+
+        <article class="about-card">
+          <h3 class="about-h" data-i18n="about.now.title">What I'm on right now</h3>
+          <ul class="dot-list">
+            <li data-i18n="about.now.item1">Building <strong>Whole Bible Community</strong> @ Higher Honduras — social platform for web + mobile.</li>
+            <li data-i18n="about.now.item2">Real-time messaging, media processing (FFmpeg, RabbitMQ) and content delivery.</li>
+            <li data-i18n="about.now.item3">Publishing releases to Apple App Store and Google Play.</li>
+            <li data-i18n="about.now.item4">Improving my English (B2) and my Rust 🦀.</li>
+          </ul>
+        </article>
+
+        <article class="about-card about-card--wide">
+          <h3 class="about-h" data-i18n="about.love.title">Things I love</h3>
+          <ul class="chip-list">
+            <li class="chip chip--purple" data-i18n="about.love.linux">GNU/Linux</li>
+            <li class="chip chip--cyan"   data-i18n="about.love.oss">Open source</li>
+            <li class="chip chip--green"  data-i18n="about.love.coffee">☕ Coffee</li>
+            <li class="chip chip--pink"   data-i18n="about.love.pancakes">🥞 Pancakes</li>
+            <li class="chip chip--yellow" data-i18n="about.love.chiptune">🎧 Chiptune / Synthwave</li>
+            <li class="chip chip--purple" data-i18n="about.love.classical">🎼 Classical &amp; Epic</li>
+            <li class="chip chip--cyan"   data-i18n="about.love.tinker">🔧 Tinkering with servers</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============================= CAREER ============================= -->
+    <section id="career" class="section">
+      <header class="section-head">
+        <h2 class="section-title" data-i18n="career.title">Career</h2>
+        <p class="section-kicker" data-i18n="career.kicker">// timeline · most recent first</p>
+      </header>
+
+      <ol class="timeline" id="timeline" aria-label="Work timeline"></ol>
+    </section>
+
+    <!-- ============================= SKILLS ============================= -->
+    <section id="skills" class="section">
+      <header class="section-head">
+        <h2 class="section-title" data-i18n="skills.title">Skills</h2>
+        <p class="section-kicker" data-i18n="skills.kicker">// tools of the trade</p>
+      </header>
+
+      <div class="skills-grid">
+        <article class="skill-card">
+          <h3 class="skill-h" data-i18n="skills.lang.title">Languages</h3>
+          <div class="skill-icons">
+            <img src="https://skillicons.dev/icons?i=ts,js,dart,php,cs,cpp,java&perline=7" alt="Languages" loading="lazy" />
+          </div>
+          <p class="skill-note" data-i18n="skills.lang.note">TypeScript &amp; JavaScript are home. Dart for Flutter. The rest for reach.</p>
+        </article>
+
+        <article class="skill-card">
+          <h3 class="skill-h" data-i18n="skills.back.title">Backend &amp; Runtime</h3>
+          <div class="skill-icons">
+            <img src="https://skillicons.dev/icons?i=nodejs,nestjs,express,bash,graphql,fastapi&perline=6" alt="Backend" loading="lazy" />
+          </div>
+          <p class="skill-note" data-i18n="skills.back.note">Building REST &amp; realtime services on Node.js — NestJS &amp; Express.</p>
+        </article>
+
+        <article class="skill-card">
+          <h3 class="skill-h" data-i18n="skills.front.title">Frontend &amp; Mobile</h3>
+          <div class="skill-icons">
+            <img src="https://skillicons.dev/icons?i=react,vue,nuxtjs,tailwind,html,css,flutter&perline=7" alt="Frontend" loading="lazy" />
+          </div>
+          <p class="skill-note" data-i18n="skills.front.note">React on the web. Flutter for cross-platform mobile.</p>
+        </article>
+
+        <article class="skill-card">
+          <h3 class="skill-h" data-i18n="skills.data.title">Data &amp; Storage</h3>
+          <div class="skill-icons">
+            <img src="https://skillicons.dev/icons?i=mongodb,mysql,postgres,redis,sqlite,dynamodb&perline=6" alt="Databases" loading="lazy" />
+          </div>
+          <p class="skill-note" data-i18n="skills.data.note">MongoDB, MySQL/MariaDB, DynamoDB &amp; Redis for cache/queues.</p>
+        </article>
+
+        <article class="skill-card">
+          <h3 class="skill-h" data-i18n="skills.cloud.title">Cloud &amp; DevOps</h3>
+          <div class="skill-icons">
+            <img src="https://skillicons.dev/icons?i=aws,gcp,docker,nginx,linux,cloudflare&perline=6" alt="Cloud" loading="lazy" />
+          </div>
+          <p class="skill-note" data-i18n="skills.cloud.note">AWS &amp; DigitalOcean daily. Docker, Nginx and plain GNU/Linux boxes.</p>
+        </article>
+
+        <article class="skill-card">
+          <h3 class="skill-h" data-i18n="skills.tools.title">Tooling &amp; AI</h3>
+          <div class="skill-icons">
+            <img src="https://skillicons.dev/icons?i=git,github,gitlab,bitbucket,vscode,vim&perline=6" alt="Tools" loading="lazy" />
+          </div>
+          <p class="skill-note" data-i18n="skills.tools.note">Git-first workflow. AI-assisted (Codex, Claude, Copilot) — CLI &amp; IDE.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============================= PROJECTS ============================= -->
+    <section id="projects" class="section">
+      <header class="section-head">
+        <h2 class="section-title" data-i18n="projects.title">Projects</h2>
+        <p class="section-kicker" data-i18n="projects.kicker">// selected work &amp; side quests</p>
+      </header>
+
+      <div class="projects-grid" id="projects-grid"></div>
+
+      <p class="projects-more">
+        <a href="https://github.com/urienix?tab=repositories" target="_blank" rel="noopener">
+          <span data-i18n="projects.more">See more on GitHub</span>
+          <span aria-hidden="true">→</span>
+        </a>
+      </p>
+    </section>
+
+    <!-- ============================= CONTACT ============================= -->
+    <section id="contact" class="section">
+      <header class="section-head">
+        <h2 class="section-title" data-i18n="contact.title">Contact</h2>
+        <p class="section-kicker" data-i18n="contact.kicker">// let's build something</p>
+      </header>
+
+      <div class="contact-card">
+        <p class="contact-lead" data-i18n="contact.lead">
+          Have an idea, a role or just want to say hi? My inbox is always open.
+        </p>
+        <a class="cta" href="mailto:urienix@hotmail.com">
+          <span class="cta-icon" aria-hidden="true">✉</span>
+          <span>urienix@hotmail.com</span>
+        </a>
+
+        <ul class="contact-list">
+          <li>
+            <span class="k" data-i18n="contact.k.web">Website</span>
+            <a href="https://urienix.moe">urienix.moe</a>
+          </li>
+          <li>
+            <span class="k" data-i18n="contact.k.gh">GitHub</span>
+            <a href="https://github.com/urienix" target="_blank" rel="noopener">github.com/urienix</a>
+          </li>
+          <li>
+            <span class="k" data-i18n="contact.k.in">LinkedIn</span>
+            <a href="https://www.linkedin.com/in/urienix" target="_blank" rel="noopener">/in/urienix</a>
+          </li>
+          <li>
+            <span class="k" data-i18n="contact.k.loc">Location</span>
+            <span>Tegucigalpa, Honduras 🇭🇳</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <span>© <span id="year">2026</span> Urienix</span>
+    <span class="dot" aria-hidden="true">·</span>
+    <span data-i18n="footer.made">Made with 💜 &amp; coffee ☕</span>
+    <span class="dot" aria-hidden="true">·</span>
+    <a href="https://github.com/urienix/urienix" target="_blank" rel="noopener" data-i18n="footer.source">Source</a>
+  </footer>
+
+  <script src="./assets/js/data.js"></script>
+  <script src="./assets/js/i18n.js"></script>
+  <script src="./assets/js/main.js"></script>
+</body>
 </html>
