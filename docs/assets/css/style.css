@@ -381,6 +381,7 @@ main { position: relative; z-index: 10; }
   height: 200px;
   display: grid;
   place-items: center;
+  perspective: 900px;
 }
 .hero-avatar {
   width: 180px;
@@ -391,7 +392,6 @@ main { position: relative; z-index: 10; }
   box-shadow:
     0 0 0 6px rgba(20,20,27,1),
     0 0 40px rgba(189,147,249,0.35);
-  animation: float 5s ease-in-out infinite;
   object-fit: cover;
   background: var(--panel);
 }
@@ -399,12 +399,67 @@ main { position: relative; z-index: 10; }
   0%,100% { transform: translateY(0); }
   50%     { transform: translateY(-8px); }
 }
+
+/* ---------- Moneda del hero ----------
+   Tres capas, un transform cada una, porque flotar y girar sobre el mismo
+   elemento significa pelearse por la misma propiedad:
+     .hero-coin       -> flota (translateY), heredado del avatar de siempre
+     .hero-coin-inner -> gira (rotateY) al pasar el raton
+     .coin-face       -> cada cara, con su reverso oculto
+   El anillo punteado se queda fuera a proposito: gira en su propio eje y no
+   acompana a la moneda. */
+
+.hero-coin {
+  width: 180px;
+  height: 180px;
+  animation: float 5s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+/* La moneda invita a jugar con ella, asi que se comporta como algo pulsable.
+   El cursor cubre la caja de la moneda, que es la misma que escucha el click:
+   los 180 px de .hero-coin, no los 200 px del hueco que la contiene. */
+.hero-coin,
+.hero-coin-inner,
+.coin-face {
+  cursor: pointer;
+}
+
+.hero-coin-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.35, 0.05, 0.2, 1);
+}
+
+.hero-avatar-wrap:hover .hero-coin-inner,
+.hero-avatar-wrap:focus-within .hero-coin-inner {
+  transform: rotateY(180deg);
+}
+
+.coin-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* El retrato es pixel art de 128 px servido a x3. Escalarlo suave evita el
+   moire que sale al reducir 384 -> 180 a base de vecino mas cercano. */
+.coin-face--back {
+  transform: rotateY(180deg);
+  image-rendering: auto;
+}
 .avatar-ring {
   position: absolute;
   inset: 0;
   border-radius: 999px;
   border: 1px dashed rgba(189,147,249,0.4);
   animation: spin 22s linear infinite;
+  /* Es decoracion y va por encima de la moneda, asi que sin esto se queda
+     con el raton: ni el cursor de la moneda ni su click llegarian nunca. */
+  pointer-events: none;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
@@ -488,6 +543,12 @@ main { position: relative; z-index: 10; }
 }
 .term-body p { margin: 0; }
 .prompt { color: var(--pink); margin-right: 8px; }
+
+/* El texto espera escondido a que el tecleo tome el mando. Se oculta con
+   visibility y no con display, para que siga ocupando su sitio y la caja no
+   cambie de alto al empezar. La clase la pone el propio JS al arrancar. */
+.js .term-body [data-i18n] { visibility: hidden; }
+.js .term-body.is-live [data-i18n] { visibility: visible; }
 .caret  { color: var(--purple); animation: blink 1s steps(1,end) infinite; }
 
 /* Socials */

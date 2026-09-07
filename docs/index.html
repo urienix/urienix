@@ -36,6 +36,12 @@
     rel="stylesheet"
   />
 
+  <!-- Marca que hay JS antes de que cargue nada mas. La terminal se escribe
+       sola, y sin esto sus lineas asomarian enteras hasta que el script
+       arrancase, solo para borrarse de golpe. Sin JS no se pone la clase y el
+       texto se lee tal cual. -->
+  <script>document.documentElement.classList.add('js');</script>
+
   <!-- Tailwind (CDN) with Dracula palette + pixel fonts -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -114,7 +120,17 @@
     <section id="home" class="section section-hero">
       <div class="hero-inner">
         <div class="hero-avatar-wrap">
-          <img src="./assets/img/urienix.png" alt="Urienix avatar" width="180" height="180" class="hero-avatar" />
+          <!-- Moneda: el logo por delante, el retrato por detras. Gira al pasar
+               el raton por encima. Cada capa lleva un solo transform, porque el
+               giro y el flotado se pisarian si compartieran elemento. -->
+          <div class="hero-coin">
+            <div class="hero-coin-inner">
+              <img src="./assets/img/urienix.png" alt="Urienix"
+                   width="180" height="180" class="hero-avatar coin-face coin-face--front" />
+              <img src="./assets/img/urienix-profile.png" alt="" aria-hidden="true"
+                   width="180" height="180" class="hero-avatar coin-face coin-face--back" />
+            </div>
+          </div>
           <span class="avatar-ring" aria-hidden="true"></span>
         </div>
 

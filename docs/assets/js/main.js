@@ -1,7 +1,7 @@
 /* ============================================================
    Urienix — main.js
    i18n · timeline & projects render · bubbles · glitch ·
-   scrollspy · reveal · CRT toggle
+   scrollspy · reveal · CRT toggle · coin toss · terminal typing
    ============================================================ */
 
 (function () {
@@ -74,6 +74,7 @@
 
       renderTimeline();
       renderProjects();
+      typeTerminal();
     }
 
     if (!animate) { paint(); return; }
@@ -316,6 +317,126 @@
     });
   }
 
+  /* ---------- Terminal typing ----------
+     The hero terminal writes itself out line by line. The text is already in
+     the DOM (i18n put it there), so this empties the lines and gives them
+     back one character at a time, dragging the caret along.
+
+     Re-running is the normal case, not the exception: every language repaint
+     calls this again, so each run takes a ticket and older runs stop as soon
+     as they notice a newer one exists. */
+
+  var typeTicket = 0;
+
+  function typeTerminal () {
+    var body  = $('.term-body');
+    var caret = $('.caret');
+    if (!body) return;
+
+    var lines = $$('p', body).map(function (p) {
+      return { p: p, span: $('[data-i18n]', p) };
+    }).filter(function (l) { return l.span; });
+    if (!lines.length) return;
+
+    var ticket = ++typeTicket;
+    var last   = lines[lines.length - 1];
+
+    // Split by code point, not by string index: the lines carry emoji, and
+    // slicing those down the middle paints half a character.
+    lines.forEach(function (l) { l.chars = Array.from(l.span.textContent); });
+
+    // From here on the lines are ours to show; the stylesheet keeps them
+    // hidden until this class says the script is driving.
+    body.classList.add('is-live');
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      if (caret) last.p.appendChild(caret);
+      return;                       // i18n already left the full text in place
+    }
+
+    // Freeze each line at the height it has while full. Emptying them would
+    // otherwise collapse the block and drag everything below it upwards.
+    lines.forEach(function (l) {
+      l.p.style.minHeight = l.p.getBoundingClientRect().height + 'px';
+      l.span.textContent = '';
+    });
+    body.setAttribute('aria-busy', 'true');
+
+    var li = 0, ci = 0;
+
+    function step () {
+      if (ticket !== typeTicket) return;      // a newer run took over
+
+      var line = lines[li];
+      if (caret && caret.parentNode !== line.p) line.p.appendChild(caret);
+
+      if (ci < line.chars.length) {
+        line.span.textContent += line.chars[ci++];
+        window.setTimeout(step, 8 + Math.random() * 11);
+        return;
+      }
+
+      li++; ci = 0;
+      if (li < lines.length) { window.setTimeout(step, 170); return; }
+
+      lines.forEach(function (l) { l.p.style.minHeight = ''; });
+      body.removeAttribute('aria-busy');
+    }
+
+    window.setTimeout(step, 300);
+  }
+
+  /* ---------- Coin toss ----------
+     Hover already flips the coin. A click throws it: it jumps, spins two full
+     turns in the air and lands with a squash. The spin rides on
+     .hero-coin-inner, the same element hover drives, so the two never fight
+     over one property — and .hero-coin keeps floating underneath, which is
+     what makes the jump read as a throw rather than a slide.
+
+     Two full turns (not one and a half) means it lands on the face it left
+     from, so nothing has to be remembered: when the animation clears, CSS
+     takes the wheel again and hover decides which side is up. */
+
+  function initCoinToss () {
+    var wrap  = $('.hero-avatar-wrap');
+    var coin  = wrap && $('.hero-coin', wrap);
+    var inner = wrap && $('.hero-coin-inner', wrap);
+
+    // Without the Web Animations API the coin simply stays a hover-only
+    // trick, which is a perfectly good place to land.
+    if (!coin || !inner || !inner.animate) return;
+
+    var tossing = false;
+
+    // Listen on the coin, not the wrapper: the wrapper is 200px wide and the
+    // coin is 180px, so a click in that 10px margin would throw a coin the
+    // cursor never said was clickable.
+    on(coin, 'click', function () {
+      if (tossing) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      // Where the coin is right now: mid-hover it already sits at 180deg, so
+      // the throw has to start there or it would snap before it jumps.
+      var base = wrap.matches(':hover') ? 180 : 0;
+      var spin = function (deg) { return 'rotateY(' + (base + deg) + 'deg)'; };
+
+      tossing = true;
+      var anim = inner.animate([
+        { offset: 0,    transform: 'translateY(0) scale(1, 1) '           + spin(0)   },
+        { offset: 0.12, transform: 'translateY(-6px) scale(0.94, 1.08) '  + spin(60)  },
+        { offset: 0.44, transform: 'translateY(-54px) scale(1.06, 1.06) ' + spin(430) },
+        { offset: 0.78, transform: 'translateY(-6px) scale(1, 1) '        + spin(670) },
+        { offset: 0.88, transform: 'translateY(0) scale(1.1, 0.9) '       + spin(710) },
+        { offset: 1,    transform: 'translateY(0) scale(1, 1) '           + spin(720) }
+      ], {
+        duration: 1150,
+        easing: 'cubic-bezier(0.33, 0, 0.32, 1)'
+      });
+
+      anim.onfinish = anim.oncancel = function () { tossing = false; };
+    });
+  }
+
   /* ---------- Year ---------- */
 
   function initYear () {
@@ -333,6 +454,7 @@
     initScrollSpy();
     markStaticSectionsForReveal();
     initCRTToggle();
+    initCoinToss();
     initYear();
 
     // If the URL loaded with a hash, browsers usually scroll for us — but they
