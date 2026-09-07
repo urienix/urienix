@@ -544,6 +544,11 @@ main { position: relative; z-index: 10; }
 .term-body p { margin: 0; }
 .prompt { color: var(--pink); margin-right: 8px; }
 
+/* El texto espera escondido a que el tecleo tome el mando. Se oculta con
+   visibility y no con display, para que siga ocupando su sitio y la caja no
+   cambie de alto al empezar. La clase la pone el propio JS al arrancar. */
+.js .term-body [data-i18n] { visibility: hidden; }
+.js .term-body.is-live [data-i18n] { visibility: visible; }
 .caret  { color: var(--purple); animation: blink 1s steps(1,end) infinite; }
 
 /* Socials */

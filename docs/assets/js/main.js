@@ -1,7 +1,7 @@
 /* ============================================================
    Urienix — main.js
    i18n · timeline & projects render · bubbles · glitch ·
-   scrollspy · reveal · CRT toggle · coin toss
+   scrollspy · reveal · CRT toggle · coin toss · terminal typing
    ============================================================ */
 
 (function () {
@@ -74,6 +74,7 @@
 
       renderTimeline();
       renderProjects();
+      typeTerminal();
     }
 
     if (!animate) { paint(); return; }
@@ -314,6 +315,75 @@
       btn.setAttribute('aria-pressed', String(!nowOff));
       writeLS(STORAGE_CRT, nowOff ? '0' : '1');
     });
+  }
+
+  /* ---------- Terminal typing ----------
+     The hero terminal writes itself out line by line. The text is already in
+     the DOM (i18n put it there), so this empties the lines and gives them
+     back one character at a time, dragging the caret along.
+
+     Re-running is the normal case, not the exception: every language repaint
+     calls this again, so each run takes a ticket and older runs stop as soon
+     as they notice a newer one exists. */
+
+  var typeTicket = 0;
+
+  function typeTerminal () {
+    var body  = $('.term-body');
+    var caret = $('.caret');
+    if (!body) return;
+
+    var lines = $$('p', body).map(function (p) {
+      return { p: p, span: $('[data-i18n]', p) };
+    }).filter(function (l) { return l.span; });
+    if (!lines.length) return;
+
+    var ticket = ++typeTicket;
+    var last   = lines[lines.length - 1];
+
+    // Split by code point, not by string index: the lines carry emoji, and
+    // slicing those down the middle paints half a character.
+    lines.forEach(function (l) { l.chars = Array.from(l.span.textContent); });
+
+    // From here on the lines are ours to show; the stylesheet keeps them
+    // hidden until this class says the script is driving.
+    body.classList.add('is-live');
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      if (caret) last.p.appendChild(caret);
+      return;                       // i18n already left the full text in place
+    }
+
+    // Freeze each line at the height it has while full. Emptying them would
+    // otherwise collapse the block and drag everything below it upwards.
+    lines.forEach(function (l) {
+      l.p.style.minHeight = l.p.getBoundingClientRect().height + 'px';
+      l.span.textContent = '';
+    });
+    body.setAttribute('aria-busy', 'true');
+
+    var li = 0, ci = 0;
+
+    function step () {
+      if (ticket !== typeTicket) return;      // a newer run took over
+
+      var line = lines[li];
+      if (caret && caret.parentNode !== line.p) line.p.appendChild(caret);
+
+      if (ci < line.chars.length) {
+        line.span.textContent += line.chars[ci++];
+        window.setTimeout(step, 8 + Math.random() * 11);
+        return;
+      }
+
+      li++; ci = 0;
+      if (li < lines.length) { window.setTimeout(step, 170); return; }
+
+      lines.forEach(function (l) { l.p.style.minHeight = ''; });
+      body.removeAttribute('aria-busy');
+    }
+
+    window.setTimeout(step, 300);
   }
 
   /* ---------- Coin toss ----------
