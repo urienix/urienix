@@ -416,6 +416,15 @@ main { position: relative; z-index: 10; }
   transform-style: preserve-3d;
 }
 
+/* La moneda invita a jugar con ella, asi que se comporta como algo pulsable.
+   El cursor cubre la caja de la moneda, que es la misma que escucha el click:
+   los 180 px de .hero-coin, no los 200 px del hueco que la contiene. */
+.hero-coin,
+.hero-coin-inner,
+.coin-face {
+  cursor: pointer;
+}
+
 .hero-coin-inner {
   position: relative;
   width: 100%;
@@ -448,6 +457,9 @@ main { position: relative; z-index: 10; }
   border-radius: 999px;
   border: 1px dashed rgba(189,147,249,0.4);
   animation: spin 22s linear infinite;
+  /* Es decoracion y va por encima de la moneda, asi que sin esto se queda
+     con el raton: ni el cursor de la moneda ni su click llegarian nunca. */
+  pointer-events: none;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
