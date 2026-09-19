@@ -36,6 +36,17 @@ python3 -m http.server 8000
 - Copy in `assets/js/i18n.js`: one flat dictionary per language.
 - Colors and typography in `:root` inside `assets/css/style.css`.
 
+### Career
+
+`jobs` in `data.js` holds one entry per engagement, in any order: the page
+sorts by `start`, newest first. Dates are `'YYYY-MM'` (or a bare `'YYYY'`
+when the month is not worth stating; no duration is shown then) and
+`end: null` means ongoing. Durations and month names are worked out at
+render time in the current language. `kind` is `job` (default), `contract`,
+`consulting` (drawn with a hollow marker: it runs alongside a job) or
+`internship`. `projects` lists project ids; they render as chips that open
+the same Details modal as the cards.
+
 ### Projects
 
 `data.js` splits projects into two groups, `projects.work` (client and

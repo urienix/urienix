@@ -166,28 +166,68 @@
     }).join('');
   }
 
-  /* ---------- Render: timeline ---------- */
+  /* ---------- Render: timeline ----------
+     Jobs sorted newest first by `start`. Dates come as 'YYYY-MM' (or a bare
+     'YYYY') and are printed in the current language with the span worked
+     out here, so nothing about time is written by hand. Each entry links
+     its projects as chips that open the Details modal. */
+
+  function parseYM (v) {
+    if (!v) return null;
+    var m = String(v).split('-');
+    return { y: parseInt(m[0], 10), m: m[1] ? parseInt(m[1], 10) : null };
+  }
+
+  function formatYM (d) {
+    if (!d) return t('career.present');
+    if (!d.m) return String(d.y);
+    return t('career.months').split(' ')[d.m - 1] + ' ' + d.y;
+  }
+
+  // Inclusive month count, the way résumés do it: Jul 2025 to Sep 2026 is
+  // one year and three months, not fourteen months.
+  function formatSpan (from, to) {
+    if (!from || !from.m) return '';
+    var now = new Date();
+    var end = to ? (to.m ? to : null) : { y: now.getFullYear(), m: now.getMonth() + 1 };
+    if (!end) return '';
+    var months = (end.y - from.y) * 12 + (end.m - from.m) + 1;
+    if (months < 1) return '';
+    var y = Math.floor(months / 12), mo = months % 12, parts = [];
+    if (y)  parts.push(y  + ' ' + t(y  === 1 ? 'career.yr' : 'career.yrs'));
+    if (mo) parts.push(mo + ' ' + t(mo === 1 ? 'career.mo' : 'career.mos'));
+    return parts.join(' ');
+  }
 
   function renderTimeline () {
     var host = $('#timeline');
     if (!host) return;
 
+    var jobs = DATA.jobs.slice().sort(function (a, b) {
+      return a.start < b.start ? 1 : a.start > b.start ? -1 : 0;
+    });
+
     host.innerHTML = '';
-    DATA.jobs.forEach(function (job, idx) {
+    jobs.forEach(function (job, idx) {
+      var current = job.end === null;
+      var side    = job.kind === 'consulting';
       var li = document.createElement('li');
-      li.className = 'tl-item' + (job.current ? ' is-current' : '');
+      li.className = 'tl-item' + (current ? ' is-current' : '') + (side ? ' is-side' : '');
       li.setAttribute('data-reveal', '');
       li.style.transitionDelay = (idx * 60) + 'ms';
 
-      var atLabel = currentLang === 'es' ? '@' : '@';
-      var loc     = job.location[currentLang];
-      var product = job.product[currentLang];
-      var role    = job.role[currentLang];
-      var dates   = job.dates[currentLang];
+      var from  = parseYM(job.start);
+      var to    = current ? null : parseYM(job.end);
+      var dates = formatYM(from) + (job.end === job.start ? '' : ' - ' + formatYM(to));
+      var span  = formatSpan(from, to);
+      var meta  = [dates, span, job.location[currentLang]].filter(Boolean).join(' · ');
 
       var tagsHtml = '';
-      if (job.current) tagsHtml += '<li class="tl-tag tl-tag--current">' + t('career.current') + '</li>';
-      if (job.remote)  tagsHtml += '<li class="tl-tag tl-tag--remote">'  + t('career.remote')  + '</li>';
+      if (current)   tagsHtml += '<li class="tl-tag tl-tag--current">' + t('career.current') + '</li>';
+      if (job.kind && job.kind !== 'job') {
+        tagsHtml += '<li class="tl-tag tl-tag--kind">' + t('career.kind.' + job.kind) + '</li>';
+      }
+      if (job.remote) tagsHtml += '<li class="tl-tag tl-tag--remote">' + t('career.remote') + '</li>';
       (job.tags || []).forEach(function (tg) {
         tagsHtml += '<li class="tl-tag">' + tg + '</li>';
       });
@@ -196,16 +236,27 @@
         return '<li>' + h + '</li>';
       }).join('');
 
+      var projects = (job.projects || []).map(function (id) {
+        var found = findProject(id);
+        return found
+          ? '<li><button type="button" class="tl-project" data-project="' + id + '">' + found.project.name + '</button></li>'
+          : '';
+      }).join('');
+
       li.innerHTML =
         '<div class="tl-head">' +
-          '<span class="tl-role">' + role + '</span>' +
-          '<span class="tl-at">' + atLabel + '</span>' +
+          '<span class="tl-role">' + job.role[currentLang] + '</span>' +
+          '<span class="tl-at">@</span>' +
           '<span class="tl-company">' + job.company + '</span>' +
-          '<span class="tl-dates">' + dates + ' · ' + loc + '</span>' +
+          '<span class="tl-dates">' + meta + '</span>' +
         '</div>' +
         '<ul class="tl-tags">' + tagsHtml + '</ul>' +
-        '<p class="tl-desc">' + product + '</p>' +
-        (highlights ? '<ul class="tl-highlights">' + highlights + '</ul>' : '');
+        '<p class="tl-desc">' + job.product[currentLang] + '</p>' +
+        (highlights ? '<ul class="tl-highlights">' + highlights + '</ul>' : '') +
+        (projects
+          ? '<div class="tl-projects"><span class="tl-projects-k">' + t('career.projects') + '</span>' +
+            '<ul class="tl-project-list">' + projects + '</ul></div>'
+          : '');
 
       host.appendChild(li);
     });

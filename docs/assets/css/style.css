@@ -834,6 +834,9 @@ main { position: relative; z-index: 10; }
   box-shadow: 3px 3px 0 var(--pink);
 }
 .tl-item.is-current::before { background: var(--green); box-shadow: 3px 3px 0 var(--cyan); animation: pulse 2s ease-in-out infinite; }
+/* Consulting runs alongside a job: a hollow marker says "in parallel". */
+.tl-item.is-side::before { background: var(--ink); border: 2px solid var(--purple); box-shadow: 3px 3px 0 rgba(255,128,191,0.5); }
+.tl-item.is-side.is-current::before { border-color: var(--green); box-shadow: 3px 3px 0 var(--cyan); animation: pulse 2s ease-in-out infinite; }
 @keyframes pulse {
   0%,100% { box-shadow: 3px 3px 0 var(--cyan), 0 0 0 0 rgba(138,255,128,0.6); }
   50%     { box-shadow: 3px 3px 0 var(--cyan), 0 0 0 6px rgba(138,255,128,0); }
@@ -875,19 +878,71 @@ main { position: relative; z-index: 10; }
   letter-spacing: 0.02em;
 }
 .tl-tag.tl-tag--current,
-.tl-tag.tl-tag--remote {
+.tl-tag.tl-tag--remote,
+.tl-tag.tl-tag--kind {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
 .tl-tag.tl-tag--current { color: var(--green); border-color: rgba(138,255,128,0.5); }
 .tl-tag.tl-tag--remote  { color: var(--yellow); border-color: rgba(241,250,140,0.5); }
+.tl-tag.tl-tag--kind    { color: var(--pink); border-color: rgba(255,128,191,0.5); }
 .tl-desc { margin: 4px 0 0; color: var(--text); font-size: 13.5px; line-height: 1.7; }
 .tl-highlights {
   margin: 10px 0 0; padding: 0 0 0 20px;
   color: var(--muted); font-size: 13px; line-height: 1.8;
 }
 .tl-highlights li::marker { color: var(--purple); }
+
+/* The entry's projects, as chips that open the Details modal. */
+.tl-projects {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  margin-top: 12px;
+}
+.tl-projects-k {
+  font-family: var(--label-family);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+}
+.tl-project-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.tl-project {
+  padding: 4px 10px;
+  font-family: var(--label-family);
+  font-size: 11.5px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--cyan);
+  background: rgba(128,255,234,0.06);
+  border: 1px solid rgba(128,255,234,0.45);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+.tl-project::after { content: " ›"; color: var(--muted); }
+.tl-project:hover,
+.tl-project:focus-visible {
+  color: var(--ink);
+  background: var(--cyan);
+  border-color: var(--cyan);
+  transform: translate(-1px,-1px);
+  box-shadow: 3px 3px 0 rgba(128,255,234,0.35);
+  outline: none;
+}
+.tl-project:hover::after,
+.tl-project:focus-visible::after { color: var(--ink); }
 
 /* ---------- Skills ---------- */
 
