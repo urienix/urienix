@@ -402,6 +402,7 @@ window.URIENIX_DATA = {
           'React', 'Node.js · TypeScript', 'Koa', 'MikroORM', 'AWS RDS (MySQL)',
           'AWS Cognito', 'AWS S3', 'AWS Lambda', 'DynamoDB', 'CloudWatch',
           'Mews API', 'Pusher', 'Postmark', 'Twilio', 'Vonage', 'SaltoKS', 'Stripe',
+          'Webhooks', 'PDF export',
         ],
         details: {
           about: {
@@ -866,4 +867,155 @@ window.URIENIX_DATA = {
       },
     ],
   },
+
+  /* ---------- Skills ----------
+     Rendered as chips, grouped. Every chip looks for its evidence in the
+     projects above: `match` is a list of lowercase needles tested against
+     each project's `tags` + `stack`, and `projects` names ids outright (for
+     things that are not a technology). A chip with evidence gets a tooltip
+     listing the projects and lights them up on click; one without is drawn
+     as plain "in the toolbox". `primary` marks the daily drivers.
+     `name` is a string or an { en, es } pair. */
+
+  skills: [
+    {
+      id: 'backend',
+      title: { en: 'Backend & APIs', es: 'Backend y APIs' },
+      note: {
+        en: 'REST and realtime services on Node.js. NestJS by choice; Express and Koa when the project said so.',
+        es: 'Servicios REST y en tiempo real sobre Node.js. NestJS por elección; Express y Koa cuando el proyecto lo pedía.',
+      },
+      items: [
+        { id: 'node',     name: 'Node.js',    primary: true, match: ['node'] },
+        { id: 'ts',       name: 'TypeScript', primary: true, match: ['typescript', 'nestjs'] },
+        { id: 'js',       name: 'JavaScript', match: ['javascript'], projects: ['mantungps', 'coinroom', 'db2storeprocedure', 'crypter-text', 'vemterimnaria'] },
+        { id: 'nestjs',   name: 'NestJS',     primary: true, match: ['nestjs'] },
+        { id: 'express',  name: 'Express',    match: ['express'] },
+        { id: 'koa',      name: 'Koa',        match: ['koa'] },
+        { id: 'rest',     name: 'REST APIs',  primary: true, match: ['rest', 'nestjs', 'express', 'koa'] },
+        { id: 'swagger',  name: 'Swagger',    match: ['swagger'] },
+        { id: 'jwt',      name: 'JWT',        match: ['jwt'] },
+        { id: 'oauth',    name: 'OAuth',      match: ['oauth'] },
+        { id: 'webhooks', name: 'Webhooks',   match: ['webhook'] },
+        { id: 'pdf',      name: { en: 'PDF generation', es: 'Generación de PDF' }, match: ['pdf'] },
+      ],
+    },
+    {
+      id: 'realtime',
+      title: { en: 'Realtime, media & devices', es: 'Tiempo real, multimedia y dispositivos' },
+      note: {
+        en: 'Sockets, queues, media pipelines and talking to hardware over raw TCP.',
+        es: 'Sockets, colas, pipelines multimedia y hablar con hardware por TCP puro.',
+      },
+      items: [
+        { id: 'socketio', name: 'Socket.IO',  primary: true, match: ['socket.io'] },
+        { id: 'pusher',   name: 'Pusher',     match: ['pusher'] },
+        { id: 'tcp',      name: { en: 'TCP sockets (custom GPS protocol)', es: 'Sockets TCP (protocolo GPS propio)' }, match: ['tcp'] },
+        { id: 'rabbitmq', name: 'RabbitMQ',   primary: true, match: ['rabbitmq'] },
+        { id: 'ffmpeg',   name: 'FFmpeg · HLS', match: ['ffmpeg', 'hls'] },
+        { id: 'push',     name: { en: 'Push notifications', es: 'Notificaciones push' }, match: ['push'] },
+      ],
+    },
+    {
+      id: 'integrations',
+      title: { en: 'Integrations', es: 'Integraciones' },
+      note: {
+        en: 'Third-party APIs wired into production: payments, comms, locks, maps and sign-in providers.',
+        es: 'APIs de terceros conectadas en producción: pagos, comunicaciones, cerraduras, mapas y proveedores de inicio de sesión.',
+      },
+      items: [
+        { id: 'stripe',   name: 'Stripe',       match: ['stripe'] },
+        { id: 'mews',     name: 'Mews (PMS)',   match: ['mews'] },
+        { id: 'twilio',   name: 'Twilio',       match: ['twilio'] },
+        { id: 'vonage',   name: 'Vonage',       match: ['vonage'] },
+        { id: 'postmark', name: 'Postmark',     match: ['postmark'] },
+        { id: 'saltoks',  name: { en: 'SaltoKS smart locks', es: 'Cerraduras SaltoKS' }, match: ['saltoks'] },
+        { id: 'mapbox',   name: 'Mapbox',       match: ['mapbox'] },
+        { id: 'gmaps',    name: 'Google Maps',  match: ['google maps'] },
+        { id: 'signin',   name: { en: 'Sign in with Google · Facebook · Apple · Microsoft', es: 'Inicio de sesión con Google · Facebook · Apple · Microsoft' }, match: ['oauth'] },
+        { id: 'firebase', name: 'Firebase',     match: ['firebase'] },
+      ],
+    },
+    {
+      id: 'data',
+      title: { en: 'Data', es: 'Datos' },
+      note: {
+        en: 'Document and relational stores, picked per project rather than by habit.',
+        es: 'Bases documentales y relacionales, elegidas según el proyecto y no por costumbre.',
+      },
+      items: [
+        { id: 'mongodb',  name: 'MongoDB',    primary: true, match: ['mongo'] },
+        { id: 'mongoose', name: 'Mongoose',   match: ['mongoose'] },
+        { id: 'mysql',    name: 'MySQL',      match: ['mysql'] },
+        { id: 'mikroorm', name: 'MikroORM',   match: ['mikroorm'] },
+        { id: 'mssql',    name: 'SQL Server', match: ['sql server'] },
+        { id: 'postgres', name: 'PostgreSQL', match: ['postgres'] },
+        { id: 'supabase', name: 'Supabase',   match: ['supabase'] },
+        { id: 'dynamodb', name: 'DynamoDB',   match: ['dynamodb'] },
+        { id: 'oracle',   name: 'Oracle 11g', match: ['oracle'] },
+        { id: 'db2',      name: 'IBM DB2',    match: ['db2'] },
+      ],
+    },
+    {
+      id: 'cloud',
+      title: { en: 'Cloud & ops', es: 'Cloud y operaciones' },
+      note: {
+        en: 'AWS and DigitalOcean daily. Servers, domains, SSL and the odd rescue of an infected site.',
+        es: 'AWS y DigitalOcean a diario. Servidores, dominios, SSL y algún rescate de sitio infectado.',
+      },
+      items: [
+        { id: 'aws',        name: 'AWS',          primary: true, match: ['aws'] },
+        { id: 'storage',    name: { en: 'Object storage (S3 · Spaces)', es: 'Almacenamiento de objetos (S3 · Spaces)' }, match: ['s3', 'spaces'] },
+        { id: 'cognito',    name: 'Cognito',      match: ['cognito'] },
+        { id: 'lambda',     name: 'Lambda',       match: ['lambda'] },
+        { id: 'rds',        name: 'RDS',          match: ['rds'] },
+        { id: 'cloudwatch', name: 'CloudWatch',   match: ['cloudwatch'] },
+        { id: 'do',         name: 'DigitalOcean', primary: true, match: ['digitalocean'] },
+        { id: 'nginx',      name: 'Nginx',        match: ['nginx'] },
+        { id: 'linux',      name: 'GNU/Linux',    primary: true, match: ['linux'] },
+        { id: 'docker',     name: 'Docker' },
+        { id: 'dns',        name: { en: 'Domains · DNS · SSL', es: 'Dominios · DNS · SSL' }, match: ['dns', 'ssl', 'domain'] },
+        { id: 'workspace',  name: 'Google Workspace', match: ['workspace'] },
+        { id: 'wordpress',  name: 'WordPress',    match: ['wordpress'] },
+        { id: 'moodle',     name: 'Moodle',       match: ['moodle'] },
+        { id: 'php',        name: 'PHP',          match: ['php', 'wordpress'] },
+      ],
+    },
+    {
+      id: 'frontend',
+      title: { en: 'Frontend & mobile', es: 'Frontend y móvil' },
+      note: {
+        en: 'React and Next.js on the web, Flutter on phones, server-rendered when that was the right call.',
+        es: 'React y Next.js en la web, Flutter en el móvil, renderizado en servidor cuando era lo correcto.',
+      },
+      items: [
+        { id: 'react',    name: 'React',            primary: true, match: ['react'] },
+        { id: 'next',     name: 'Next.js',          primary: true, match: ['next.js'] },
+        { id: 'tailwind', name: 'Tailwind CSS',     match: ['tailwind'] },
+        { id: 'hbs',      name: 'Handlebars (SSR)', match: ['handlebars'] },
+        { id: 'htmlcss',  name: 'HTML · CSS' },
+        { id: 'flutter',  name: 'Flutter',          primary: true, match: ['flutter'] },
+        { id: 'dart',     name: 'Dart',             match: ['flutter'] },
+        { id: 'stores',   name: { en: 'App Store & Google Play releases', es: 'Publicación en App Store y Google Play' }, projects: ['wbc'] },
+      ],
+    },
+    {
+      id: 'beyond',
+      title: { en: 'Beyond code', es: 'Más allá del código' },
+      note: {
+        en: 'The part of the job that is not typing: leading, coordinating, advising and keeping clients online.',
+        es: 'La parte del trabajo que no es teclear: liderar, coordinar, asesorar y mantener a los clientes en línea.',
+      },
+      items: [
+        { id: 'lead',     name: 'Tech lead', primary: true, projects: ['wbc'] },
+        { id: 'coord',    name: { en: 'Project coordination', es: 'Coordinación de proyectos' }, projects: ['dalamarhomes', 'homev', 'elglobalnews'] },
+        { id: 'review',   name: { en: 'Code review & planning', es: 'Revisión de código y planificación' }, projects: ['wbc'] },
+        { id: 'consult',  name: { en: 'Client consulting', es: 'Consultoría a clientes' }, projects: ['virtualmoore', 'innova'] },
+        { id: 'infra',    name: { en: 'Infra & domains for clients', es: 'Infra y dominios para clientes' }, projects: ['dalamarhomes', 'homev', 'elglobalnews', 'virtualmoore', 'innova'] },
+        { id: 'security', name: { en: 'Incident cleanup (malware)', es: 'Limpieza de incidentes (malware)' }, projects: ['elglobalnews'] },
+        { id: 'ai',       name: { en: 'AI-assisted workflows (Codex, Claude, Copilot)', es: 'Flujos asistidos por IA (Codex, Claude, Copilot)' }, primary: true, projects: ['wbc', 'clvhh'] },
+        { id: 'npm',      name: { en: 'Open-source npm packages', es: 'Paquetes npm open source' }, projects: ['db2storeprocedure', 'crypter-text'] },
+      ],
+    },
+  ],
 };

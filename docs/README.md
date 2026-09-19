@@ -48,6 +48,16 @@ block (`about`, `responsibilities`, `achievements`) plus `stack` and `href`.
 - **No public link:** leave `href` out and set `status` to `internal`,
   `offline` or `advisory`; the card prints a note instead of a link.
 
+### Skills
+
+`data.js` also holds `skills`: groups of chips. A chip finds its own evidence
+in the projects: `match` lists lowercase needles tested against every
+project's `tags` + `stack`, and `projects` names ids directly (for things like
+"Tech lead"). Chips with evidence show a tooltip listing those projects and
+light their cards up on click; chips without any are drawn as plain "in the
+toolbox". `primary: true` marks the daily drivers. So adding a tag to a
+project automatically updates the chips that mention it.
+
 ## Deploy
 
 The `CNAME` file points at **urienix.moe**. GitHub Pages serves this repo

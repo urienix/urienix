@@ -1,8 +1,8 @@
 /* ============================================================
    Urienix — main.js
    i18n · timeline & projects render · project details modal ·
-   bubbles · glitch · scrollspy · reveal · CRT toggle · coin toss ·
-   terminal typing
+   skills chips & project highlight · bubbles · glitch · scrollspy ·
+   reveal · CRT toggle · coin toss · terminal typing
    ============================================================ */
 
 (function () {
@@ -15,6 +15,7 @@
     { key: 'work',     grid: '#projects-grid-work'     },
     { key: 'personal', grid: '#projects-grid-personal' },
   ];
+  var SKILLS = DATA.skills || [];
 
   var STORAGE_LANG = 'urienix-lang';
   var STORAGE_CRT  = 'urienix-crt';
@@ -42,6 +43,9 @@
     var dict = I18N[currentLang] || {};
     return dict[key] != null ? dict[key] : key;
   }
+
+  // Data fields are either a plain string or an { en, es } pair.
+  function L (v) { return (v && typeof v === 'object') ? (v[currentLang] || v.en) : v; }
 
   /* ---------- i18n paint ---------- */
 
@@ -85,7 +89,9 @@
 
       renderTimeline();
       renderProjects();
+      applyProjectFilter();      // cards were rebuilt; put the highlight back
       renderProjectModal();      // no-op unless a project is open
+      renderSkills();
       typeTerminal();
     }
 
@@ -160,6 +166,12 @@
      carry a kicker with the employer and my role there; every card gets a
      Details button that opens the modal, and a link button when the project
      has somewhere public to go. */
+
+  function allProjects () {
+    return PROJECT_GROUPS.reduce(function (acc, g) {
+      return acc.concat(PROJECTS[g.key] || []);
+    }, []);
+  }
 
   function findProject (id) {
     for (var g = 0; g < PROJECT_GROUPS.length; g++) {
@@ -380,6 +392,147 @@
     on(el, 'close', afterProjectClose);
   }
 
+  /* ---------- Render: skills ----------
+     Chips grouped by area, each one backed by the projects that used it.
+     Evidence is looked up, not declared twice: a chip's `match` needles are
+     tested against every project's tags + stack, and `projects` can name
+     ids directly for things that are not a technology (leading a team,
+     say). Chips with evidence become buttons that light those cards up. */
+
+  function findSkill (id) {
+    for (var g = 0; g < SKILLS.length; g++) {
+      var items = SKILLS[g].items || [];
+      for (var i = 0; i < items.length; i++) {
+        if (items[i].id === id) return items[i];
+      }
+    }
+    return null;
+  }
+
+  function skillEvidence (item) {
+    var needles = (item.match || []).map(function (n) { return n.toLowerCase(); });
+    var named   = item.projects || [];
+    return allProjects().filter(function (p) {
+      if (named.indexOf(p.id) >= 0) return true;
+      if (!needles.length) return false;
+      var hay = (p.tags || []).concat(p.stack || []).map(function (x) { return x.toLowerCase(); });
+      return hay.some(function (h) {
+        return needles.some(function (n) { return h.indexOf(n) >= 0; });
+      });
+    });
+  }
+
+  function renderSkills () {
+    var host = $('#skills-groups');
+    if (!host) return;
+
+    host.innerHTML = '';
+    SKILLS.forEach(function (group, idx) {
+      var card = document.createElement('article');
+      card.className = 'skill-card';
+      card.setAttribute('data-reveal', '');
+      card.style.transitionDelay = (idx * 60) + 'ms';
+
+      var chips = (group.items || []).map(function (item) {
+        var label = L(item.name);
+        var ev    = skillEvidence(item);
+        var cls   = 'skill-chip' + (item.primary ? ' is-primary' : '');
+
+        if (!ev.length) {
+          return '<li><span class="' + cls + ' is-plain">' + label + '</span></li>';
+        }
+
+        // The tooltip is a real (visually hidden) element so screen readers
+        // get the same list the pointer does, without a second native tip.
+        var tipId = 'skilltip-' + item.id;
+        var tip   = t('skills.usedIn') + ': ' + ev.map(function (p) { return p.name; }).join(', ');
+        return '<li>' +
+          '<button type="button" class="' + cls + '" data-skill="' + item.id + '" aria-describedby="' + tipId + '">' +
+            label +
+            '<span class="skill-tip" id="' + tipId + '" role="tooltip">' + tip + '</span>' +
+          '</button>' +
+        '</li>';
+      }).join('');
+
+      card.innerHTML =
+        '<h3 class="skill-h">' + L(group.title) + '</h3>' +
+        '<ul class="skill-chips">' + chips + '</ul>' +
+        (group.note ? '<p class="skill-note">' + L(group.note) + '</p>' : '');
+
+      host.appendChild(card);
+    });
+
+    observeReveals();
+  }
+
+  /* ---------- Project highlight ----------
+     Clicking a chip dims every project card except the ones that back it,
+     scrolls to the first of them and leaves a status line under the
+     Projects heading with a way out. Only the skill id is kept, so a
+     language switch or a card re-render can rebuild the rest. */
+
+  var activeSkill = null;
+
+  function applyProjectFilter () {
+    var section = $('#projects');
+    var status  = $('#projects-filter');
+    if (!section) return;
+
+    var item = activeSkill && findSkill(activeSkill);
+    var ids  = item ? skillEvidence(item).map(function (p) { return p.id; }) : [];
+    var on   = !!item && ids.length > 0;
+
+    section.classList.toggle('projects-filtering', on);
+    $$('.project-card', section).forEach(function (card) {
+      var btn = $('[data-project]', card);
+      var hit = on && btn && ids.indexOf(btn.getAttribute('data-project')) >= 0;
+      card.classList.toggle('is-hit', hit);
+    });
+
+    if (!status) return;
+    if (on) {
+      status.innerHTML =
+        t('projects.filter.showing') + ' <strong>' + L(item.name) + '</strong> ' +
+        '<button type="button" class="link-btn" data-filter-clear>' + t('projects.filter.clear') + '</button>';
+      status.hidden = false;
+    } else {
+      status.innerHTML = '';
+      status.hidden = true;
+    }
+  }
+
+  function setProjectFilter (skillId) {
+    activeSkill = skillId;
+    applyProjectFilter();
+
+    var first = $('#projects .project-card.is-hit');
+    if (first && first.scrollIntoView) first.scrollIntoView({ block: 'center' });
+  }
+
+  function clearProjectFilter () {
+    activeSkill = null;
+    applyProjectFilter();
+  }
+
+  function initSkillFilter () {
+    on(document, 'click', function (e) {
+      var target = e.target;
+      if (!target || !target.closest) return;
+
+      var chip = target.closest('[data-skill]');
+      if (chip) { setProjectFilter(chip.getAttribute('data-skill')); return; }
+
+      if (target.closest('[data-filter-clear]')) clearProjectFilter();
+    });
+
+    // Esc clears the highlight, unless the modal is open and Esc is its job.
+    on(document, 'keydown', function (e) {
+      if (e.key !== 'Escape' || !activeSkill) return;
+      if (modal.el && modal.el.open) return;
+      clearProjectFilter();
+    });
+  }
+
   /* ---------- Bubbles ---------- */
 
   function initBubbles () {
@@ -492,7 +645,7 @@
 
   function markStaticSectionsForReveal () {
     // Wrap section-head and content blocks so they animate in as well
-    $$('.section .section-head, .projects-group-head, .about-card, .skill-card, .contact-card').forEach(function (el) {
+    $$('.section .section-head, .projects-group-head, .about-card, .skill-card, .skills-legend, .contact-card').forEach(function (el) {
       if (!el.hasAttribute('data-reveal')) el.setAttribute('data-reveal', '');
     });
     observeReveals();
@@ -657,6 +810,7 @@
     initCRTToggle();
     initCoinToss();
     initProjectModal();
+    initSkillFilter();
     initYear();
 
     // If the URL loaded with a hash, browsers usually scroll for us — but they
