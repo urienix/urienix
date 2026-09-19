@@ -1,14 +1,21 @@
 /* ============================================================
    Urienix — main.js
-   i18n · timeline & projects render · bubbles · glitch ·
-   scrollspy · reveal · CRT toggle · coin toss · terminal typing
+   i18n · timeline & projects render · project details modal ·
+   skills chips & project highlight · bubbles · glitch · scrollspy ·
+   reveal · CRT toggle · coin toss · terminal typing
    ============================================================ */
 
 (function () {
   'use strict';
 
   var I18N = window.URIENIX_I18N || {};
-  var DATA = window.URIENIX_DATA || { jobs: [], projects: [] };
+  var DATA = window.URIENIX_DATA || { jobs: [], projects: {} };
+  var PROJECTS = DATA.projects || {};
+  var PROJECT_GROUPS = [
+    { key: 'work',     grid: '#projects-grid-work'     },
+    { key: 'personal', grid: '#projects-grid-personal' },
+  ];
+  var SKILLS = DATA.skills || [];
 
   var STORAGE_LANG = 'urienix-lang';
   var STORAGE_CRT  = 'urienix-crt';
@@ -36,6 +43,9 @@
     var dict = I18N[currentLang] || {};
     return dict[key] != null ? dict[key] : key;
   }
+
+  // Data fields are either a plain string or an { en, es } pair.
+  function L (v) { return (v && typeof v === 'object') ? (v[currentLang] || v.en) : v; }
 
   /* ---------- i18n paint ---------- */
 
@@ -68,12 +78,20 @@
         if (dict[key] != null) el.setAttribute('title', dict[key]);
       });
 
+      $$('[data-i18n-aria]').forEach(function (el) {
+        var key = el.getAttribute('data-i18n-aria');
+        if (dict[key] != null) el.setAttribute('aria-label', dict[key]);
+      });
+
       $$('[data-set-lang]').forEach(function (btn) {
         btn.setAttribute('aria-pressed', String(btn.getAttribute('data-set-lang') === lang));
       });
 
       renderTimeline();
       renderProjects();
+      applyProjectFilter();      // cards were rebuilt; put the highlight back
+      renderProjectModal();      // no-op unless a project is open
+      renderSkills();
       typeTerminal();
     }
 
@@ -143,40 +161,376 @@
     observeReveals();
   }
 
-  /* ---------- Render: projects ---------- */
+  /* ---------- Render: projects ----------
+     Two grids, one per group in data.js (`work` and `personal`). Work cards
+     carry a kicker with the employer and my role there; every card gets a
+     Details button that opens the modal, and a link button when the project
+     has somewhere public to go. */
 
-  function renderProjects () {
-    var grid = $('#projects-grid');
-    if (!grid) return;
+  function allProjects () {
+    return PROJECT_GROUPS.reduce(function (acc, g) {
+      return acc.concat(PROJECTS[g.key] || []);
+    }, []);
+  }
 
+  function findProject (id) {
+    for (var g = 0; g < PROJECT_GROUPS.length; g++) {
+      var list = PROJECTS[PROJECT_GROUPS[g].key] || [];
+      for (var i = 0; i < list.length; i++) {
+        if (list[i].id === id) return { project: list[i], group: PROJECT_GROUPS[g].key };
+      }
+    }
+    return null;
+  }
+
+  // Logo when there is one; a pixel monogram of the initials while there is
+  // not. Adding `img` to the project in data.js is all it takes to swap.
+  function projectMediaHtml (p) {
+    if (p.img) {
+      return '<img src="' + p.img + '" alt="' + p.name + ' logo" loading="lazy" />';
+    }
+    var initials = p.mono || p.name.replace(/[^A-Za-z0-9]/g, '').slice(0, 2).toUpperCase();
+    var accent   = p.accent || 'purple';
+    return '<span class="project-mono project-mono--' + accent + '" aria-hidden="true">' + initials + '</span>';
+  }
+
+  function projectStatusHtml (p) {
+    if (!p.status || p.status === 'live') return '';
+    return '<p class="project-status">' + t('projects.status.' + p.status) + '</p>';
+  }
+
+  function projectLinkHtml (p, cls) {
+    if (!p.href) return '';
+    var label = (p.cta && p.cta[currentLang]) || t('projects.visit');
+    return '<a class="project-btn ' + cls + '" href="' + p.href + '" target="_blank" rel="noopener">' +
+             label + ' <span aria-hidden="true">↗</span>' +
+           '</a>';
+  }
+
+  function tagsHtml (list) {
+    return (list || []).map(function (tg) {
+      return '<li class="project-tag">' + tg + '</li>';
+    }).join('');
+  }
+
+  function renderProjectGrid (grid, list, group) {
     grid.innerHTML = '';
-    DATA.projects.forEach(function (p, idx) {
+    list.forEach(function (p, idx) {
       var card = document.createElement('article');
       card.className = 'project-card';
       card.setAttribute('data-reveal', '');
       card.style.transitionDelay = (idx * 80) + 'ms';
 
-      var tags = (p.tags || []).map(function (tg) {
-        return '<li class="project-tag">' + tg + '</li>';
-      }).join('');
+      var kicker = '';
+      if (group === 'work' && p.client) {
+        var role = p.role && p.role[currentLang];
+        kicker =
+          '<p class="project-kicker">' +
+            '<span class="project-client">' + p.client + '</span>' +
+            (role ? '<span class="project-role">' + role + '</span>' : '') +
+          '</p>';
+      }
+
+      var tags = tagsHtml(p.tags);
 
       card.innerHTML =
-        '<div class="project-media">' +
-          '<img src="' + p.img + '" alt="' + p.name + ' preview" />' +
-        '</div>' +
+        '<div class="project-media' + (p.plate ? ' project-media--plate' : '') + '">' + projectMediaHtml(p) + '</div>' +
         '<div class="project-body">' +
+          kicker +
           '<h3 class="project-title">' + p.name + '</h3>' +
           '<p class="project-desc">' + p.desc[currentLang] + '</p>' +
           (tags ? '<ul class="project-tags">' + tags + '</ul>' : '') +
-          '<a class="project-cta" href="' + p.href + '" target="_blank" rel="noopener">' +
-            p.cta[currentLang] + ' →' +
-          '</a>' +
+          '<div class="project-actions">' +
+            '<button type="button" class="project-btn project-btn--primary" data-project="' + p.id + '">' +
+              t('projects.details') +
+            '</button>' +
+            projectLinkHtml(p, 'project-btn--ghost') +
+          '</div>' +
+          projectStatusHtml(p) +
         '</div>';
 
       grid.appendChild(card);
     });
+  }
+
+  function renderProjects () {
+    PROJECT_GROUPS.forEach(function (g) {
+      var grid = $(g.grid);
+      if (grid) renderProjectGrid(grid, PROJECTS[g.key] || [], g.key);
+    });
+    observeReveals();
+  }
+
+  /* ---------- Project details modal ----------
+     One <dialog> in the page, filled on demand from data.js. Opening and
+     closing go through showModal()/close() so Esc, focus trapping and the
+     backdrop are the browser's job; we only lock the page scroll, put the
+     focus back on the button that opened it, and repaint the contents when
+     the language changes while it is open. */
+
+  var modal = { el: null, body: null, foot: null, path: null, id: null, openerId: null };
+
+  function renderProjectModal () {
+    if (!modal.el || !modal.id) return;
+    var found = findProject(modal.id);
+    if (!found) return;
+
+    var p     = found.project;
+    var work  = found.group === 'work';
+    var d     = p.details || {};
+    var lang  = currentLang;
+    var role  = p.role && p.role[lang];
+
+    var kicker = work
+      ? (role ? role + ' ' + t('modal.at') + ' ' : '') + '<strong>' + p.client + '</strong>'
+      : t('modal.personal');
+
+    function paras (items) {
+      return items.map(function (x) { return '<p>' + x + '</p>'; }).join('');
+    }
+    function bullets (items) {
+      return '<ul class="pm-list">' +
+        items.map(function (x) { return '<li>' + x + '</li>'; }).join('') +
+      '</ul>';
+    }
+    function section (title, html) {
+      if (!html) return '';
+      return '<section class="pm-section"><h3 class="pm-h">' + title + '</h3>' + html + '</section>';
+    }
+    function pick (block) {
+      var items = block && block[lang];
+      return items && items.length ? items : null;
+    }
+
+    var about = pick(d.about);
+    var resp  = pick(d.responsibilities);
+    var wins  = pick(d.achievements);
+    var stack = tagsHtml(p.stack || p.tags);
+
+    modal.path.textContent = 'urienix@moe:~/projects/' + p.id + '$';
+
+    modal.body.innerHTML =
+      '<header class="pm-hero">' +
+        '<div class="pm-logo' + (p.plate ? ' pm-logo--plate' : '') + '">' + projectMediaHtml(p) + '</div>' +
+        '<div class="pm-heading">' +
+          '<p class="pm-kicker">' + kicker + '</p>' +
+          '<h2 class="pm-title" id="pm-title">' + p.name + '</h2>' +
+          '<p class="pm-tagline">' + p.desc[lang] + '</p>' +
+          projectStatusHtml(p) +
+        '</div>' +
+      '</header>' +
+      section(t('modal.about'), about && paras(about)) +
+      section(t(work ? 'modal.resp' : 'modal.built'), resp && bullets(resp)) +
+      section(t(work ? 'modal.wins' : 'modal.highlights'), wins && bullets(wins)) +
+      section(t('modal.stack'), stack && '<ul class="project-tags">' + stack + '</ul>');
+
+    modal.foot.innerHTML =
+      projectLinkHtml(p, 'project-btn--primary') +
+      '<button type="button" class="project-btn project-btn--ghost" data-modal-close>' +
+        t('modal.close') +
+      '</button>';
+  }
+
+  function openProject (id) {
+    if (!modal.el || !findProject(id)) return;
+    modal.id = id;
+    modal.openerId = id;
+    renderProjectModal();
+
+    document.body.classList.add('modal-open');
+    if (typeof modal.el.showModal === 'function') {
+      if (!modal.el.open) modal.el.showModal();
+    } else {
+      modal.el.setAttribute('open', '');    // no top layer, but still usable
+    }
+    modal.body.scrollTop = 0;
+  }
+
+  function afterProjectClose () {
+    document.body.classList.remove('modal-open');
+    modal.id = null;
+
+    // The cards may have been re-rendered while the modal was open (language
+    // switch), so look the button up again instead of trusting an old node.
+    var btn = modal.openerId && $('[data-project="' + modal.openerId + '"]');
+    modal.openerId = null;
+    if (btn && btn.focus) btn.focus();
+  }
+
+  function closeProject () {
+    if (!modal.el || !modal.el.open) return;
+    if (typeof modal.el.close === 'function') {
+      modal.el.close();                     // fires 'close' -> afterProjectClose
+    } else {
+      modal.el.removeAttribute('open');
+      afterProjectClose();
+    }
+  }
+
+  function initProjectModal () {
+    var el = $('#project-modal');
+    if (!el) return;
+    modal.el   = el;
+    modal.body = $('#pm-body', el);
+    modal.foot = $('#pm-foot', el);
+    modal.path = $('#pm-path', el);
+
+    // One listener for every Details / Close button, present or future.
+    on(document, 'click', function (e) {
+      var target = e.target;
+      if (!target || !target.closest) return;
+
+      var opener = target.closest('[data-project]');
+      if (opener) { openProject(opener.getAttribute('data-project')); return; }
+
+      if (target.closest('[data-modal-close]')) closeProject();
+    });
+
+    // A click on the backdrop lands on the dialog itself, never on .pm-window.
+    on(el, 'click', function (e) { if (e.target === el) closeProject(); });
+
+    on(el, 'close', afterProjectClose);
+  }
+
+  /* ---------- Render: skills ----------
+     Chips grouped by area, each one backed by the projects that used it.
+     Evidence is looked up, not declared twice: a chip's `match` needles are
+     tested against every project's tags + stack, and `projects` can name
+     ids directly for things that are not a technology (leading a team,
+     say). Chips with evidence become buttons that light those cards up. */
+
+  function findSkill (id) {
+    for (var g = 0; g < SKILLS.length; g++) {
+      var items = SKILLS[g].items || [];
+      for (var i = 0; i < items.length; i++) {
+        if (items[i].id === id) return items[i];
+      }
+    }
+    return null;
+  }
+
+  function skillEvidence (item) {
+    var needles = (item.match || []).map(function (n) { return n.toLowerCase(); });
+    var named   = item.projects || [];
+    return allProjects().filter(function (p) {
+      if (named.indexOf(p.id) >= 0) return true;
+      if (!needles.length) return false;
+      var hay = (p.tags || []).concat(p.stack || []).map(function (x) { return x.toLowerCase(); });
+      return hay.some(function (h) {
+        return needles.some(function (n) { return h.indexOf(n) >= 0; });
+      });
+    });
+  }
+
+  function renderSkills () {
+    var host = $('#skills-groups');
+    if (!host) return;
+
+    host.innerHTML = '';
+    SKILLS.forEach(function (group, idx) {
+      var card = document.createElement('article');
+      card.className = 'skill-card';
+      card.setAttribute('data-reveal', '');
+      card.style.transitionDelay = (idx * 60) + 'ms';
+
+      var chips = (group.items || []).map(function (item) {
+        var label = L(item.name);
+        var ev    = skillEvidence(item);
+        var cls   = 'skill-chip' + (item.primary ? ' is-primary' : '');
+
+        if (!ev.length) {
+          return '<li><span class="' + cls + ' is-plain">' + label + '</span></li>';
+        }
+
+        // The tooltip is a real (visually hidden) element so screen readers
+        // get the same list the pointer does, without a second native tip.
+        var tipId = 'skilltip-' + item.id;
+        var tip   = t('skills.usedIn') + ': ' + ev.map(function (p) { return p.name; }).join(', ');
+        return '<li>' +
+          '<button type="button" class="' + cls + '" data-skill="' + item.id + '" aria-describedby="' + tipId + '">' +
+            label +
+            '<span class="skill-tip" id="' + tipId + '" role="tooltip">' + tip + '</span>' +
+          '</button>' +
+        '</li>';
+      }).join('');
+
+      card.innerHTML =
+        '<h3 class="skill-h">' + L(group.title) + '</h3>' +
+        '<ul class="skill-chips">' + chips + '</ul>' +
+        (group.note ? '<p class="skill-note">' + L(group.note) + '</p>' : '');
+
+      host.appendChild(card);
+    });
 
     observeReveals();
+  }
+
+  /* ---------- Project highlight ----------
+     Clicking a chip dims every project card except the ones that back it,
+     scrolls to the first of them and leaves a status line under the
+     Projects heading with a way out. Only the skill id is kept, so a
+     language switch or a card re-render can rebuild the rest. */
+
+  var activeSkill = null;
+
+  function applyProjectFilter () {
+    var section = $('#projects');
+    var status  = $('#projects-filter');
+    if (!section) return;
+
+    var item = activeSkill && findSkill(activeSkill);
+    var ids  = item ? skillEvidence(item).map(function (p) { return p.id; }) : [];
+    var on   = !!item && ids.length > 0;
+
+    section.classList.toggle('projects-filtering', on);
+    $$('.project-card', section).forEach(function (card) {
+      var btn = $('[data-project]', card);
+      var hit = on && btn && ids.indexOf(btn.getAttribute('data-project')) >= 0;
+      card.classList.toggle('is-hit', hit);
+    });
+
+    if (!status) return;
+    if (on) {
+      status.innerHTML =
+        t('projects.filter.showing') + ' <strong>' + L(item.name) + '</strong> ' +
+        '<button type="button" class="link-btn" data-filter-clear>' + t('projects.filter.clear') + '</button>';
+      status.hidden = false;
+    } else {
+      status.innerHTML = '';
+      status.hidden = true;
+    }
+  }
+
+  function setProjectFilter (skillId) {
+    activeSkill = skillId;
+    applyProjectFilter();
+
+    var first = $('#projects .project-card.is-hit');
+    if (first && first.scrollIntoView) first.scrollIntoView({ block: 'center' });
+  }
+
+  function clearProjectFilter () {
+    activeSkill = null;
+    applyProjectFilter();
+  }
+
+  function initSkillFilter () {
+    on(document, 'click', function (e) {
+      var target = e.target;
+      if (!target || !target.closest) return;
+
+      var chip = target.closest('[data-skill]');
+      if (chip) { setProjectFilter(chip.getAttribute('data-skill')); return; }
+
+      if (target.closest('[data-filter-clear]')) clearProjectFilter();
+    });
+
+    // Esc clears the highlight, unless the modal is open and Esc is its job.
+    on(document, 'keydown', function (e) {
+      if (e.key !== 'Escape' || !activeSkill) return;
+      if (modal.el && modal.el.open) return;
+      clearProjectFilter();
+    });
   }
 
   /* ---------- Bubbles ---------- */
@@ -291,7 +645,7 @@
 
   function markStaticSectionsForReveal () {
     // Wrap section-head and content blocks so they animate in as well
-    $$('.section .section-head, .about-card, .skill-card, .contact-card').forEach(function (el) {
+    $$('.section .section-head, .projects-group-head, .about-card, .skill-card, .skills-legend, .contact-card').forEach(function (el) {
       if (!el.hasAttribute('data-reveal')) el.setAttribute('data-reveal', '');
     });
     observeReveals();
@@ -455,6 +809,8 @@
     markStaticSectionsForReveal();
     initCRTToggle();
     initCoinToss();
+    initProjectModal();
+    initSkillFilter();
     initYear();
 
     // If the URL loaded with a hash, browsers usually scroll for us — but they
