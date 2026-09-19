@@ -19,7 +19,7 @@ window.URIENIX_I18N = {
 
     'hero.role':   'Software Engineer · Backend & Integrations',
     'hero.line1':  "Hi! I'm Jairo Medrano, also known as Urienix.",
-    'hero.line2':  'I build backends and everything around them: APIs, realtime, integrations.',
+    'hero.line2':  "I build backends and what's around them: APIs, realtime, integrations.",
     'hero.line3':  '7+ years shipping for teams in the US and Honduras, from GMT-6.',
     'hero.line4':  'Tech lead at Higher Honduras by day; side quests by night.',
     'hero.line5':  'Powered by coffee ☕ and pancakes 🥞. Come on in.',
@@ -145,8 +145,8 @@ window.URIENIX_I18N = {
 
     'hero.role':   'Ingeniero de Software · Backend e Integraciones',
     'hero.line1':  '¡Hola! Soy Jairo Medrano, también conocido como Urienix.',
-    'hero.line2':  'Construyo backends y todo lo que los rodea: APIs, tiempo real, integraciones.',
-    'hero.line3':  '7+ años lanzando software para equipos de EE. UU. y Honduras, desde GMT-6.',
+    'hero.line2':  'Construyo backends y lo que los rodea: APIs, tiempo real, integraciones.',
+    'hero.line3':  '7+ años lanzando para equipos de EE. UU. y Honduras, desde GMT-6.',
     'hero.line4':  'Tech lead en Higher Honduras de día; misiones secundarias de noche.',
     'hero.line5':  'Alimentado por café ☕ y panqueques 🥞. Pasa adelante.',
     'hero.skip':   'Clic para saltar el tecleo',

@@ -549,6 +549,8 @@ main { position: relative; z-index: 10; }
    cambie de alto al empezar. La clase la pone el propio JS al arrancar. */
 .js .term-body [data-i18n] { visibility: hidden; }
 .js .term-body.is-live [data-i18n] { visibility: visible; }
+/* While it is still typing the whole window is a "skip" button. */
+.js .term-body[aria-busy="true"] { cursor: pointer; }
 .caret  { color: var(--purple); animation: blink 1s steps(1,end) infinite; }
 
 /* Two ways out of the hero: the work, or a conversation. */
