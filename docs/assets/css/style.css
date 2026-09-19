@@ -551,6 +551,16 @@ main { position: relative; z-index: 10; }
 .js .term-body.is-live [data-i18n] { visibility: visible; }
 .caret  { color: var(--purple); animation: blink 1s steps(1,end) infinite; }
 
+/* Two ways out of the hero: the work, or a conversation. */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+.hero-actions .cta { align-self: auto; }
+
 /* Socials */
 .socials {
   display: flex;
