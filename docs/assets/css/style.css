@@ -1016,11 +1016,10 @@ button.skill-chip.is-primary:focus-visible {
   border: 1px solid var(--edge);
   border-radius: 3px;
   box-shadow: 4px 4px 0 rgba(0,0,0,0.35);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-4px);
+  /* display, not visibility: a hidden-but-laid-out tip past the right edge
+     still widens the page's scrollable area in Chromium. */
+  display: none;
   pointer-events: none;
-  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0s linear 0.15s;
 }
 .skill-tip::before {
   content: "";
@@ -1036,11 +1035,17 @@ button.skill-chip.is-primary:focus-visible {
 }
 button.skill-chip:hover .skill-tip,
 button.skill-chip:focus-visible .skill-tip {
-  opacity: 1;
-  visibility: visible;
-  transform: none;
-  transition-delay: 0s;
+  display: block;
+  animation: tip-in 0.15s ease both;
 }
+@keyframes tip-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: none; }
+}
+/* Chips near the right edge hang their tip from the right corner instead,
+   so it stays on screen. main.js sets the class as the pointer arrives. */
+.skill-chip.tip-left .skill-tip { left: auto; right: 0; }
+.skill-chip.tip-left .skill-tip::before { left: auto; right: 12px; }
 @media (hover: none) {
   .skill-tip { display: none; }
 }

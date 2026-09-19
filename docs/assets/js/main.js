@@ -568,6 +568,17 @@
       if (target.closest('[data-filter-clear]')) clearProjectFilter();
     });
 
+    // Before a tip shows, check whether it fits to the right of its chip;
+    // if not, the stylesheet hangs it from the chip's right edge instead.
+    function placeTip (e) {
+      var chip = e.target && e.target.closest && e.target.closest('[data-skill]');
+      if (!chip) return;
+      var room = window.innerWidth - chip.getBoundingClientRect().left - 16;
+      chip.classList.toggle('tip-left', room < Math.min(260, window.innerWidth * 0.7));
+    }
+    on(document, 'mouseover', placeTip);
+    on(document, 'focusin', placeTip);
+
     // Esc clears the highlight, unless the modal is open and Esc is its job.
     on(document, 'keydown', function (e) {
       if (e.key !== 'Escape' || !activeSkill) return;
