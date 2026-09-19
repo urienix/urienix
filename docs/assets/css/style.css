@@ -803,6 +803,36 @@ main { position: relative; z-index: 10; }
 
 /* ---------- Projects ---------- */
 
+/* Two groups inside the section: real-world work and personal side quests.
+   Each gets a small pixel heading of its own, one step below .section-title. */
+.projects-group + .projects-group { margin-top: clamp(44px, 7vh, 72px); }
+.projects-group-head {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 22px;
+}
+.projects-group-title {
+  margin: 0;
+  font-family: "Press Start 2P", monospace;
+  font-size: clamp(12px, 1.7vw, 15px);
+  line-height: 1.6;
+  color: var(--yellow);
+  text-shadow: 0 0 16px rgba(241,250,140,0.25);
+}
+.projects-group-title::before {
+  content: ">";
+  margin-right: 12px;
+  color: var(--purple);
+}
+.projects-group-note {
+  margin: 0 0 0 28px;
+  font-family: var(--label-family);
+  font-size: 12.5px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
 .projects-grid {
   display: grid;
   gap: 20px;
@@ -831,7 +861,65 @@ main { position: relative; z-index: 10; }
   border-bottom: 1px solid var(--edge);
 }
 .project-media img { max-height: 120px; max-width: 100%; object-fit: contain; }
+
+/* Stand-in logo: the project's initials in a dashed pixel frame, used until
+   the real artwork lands in assets/img. Colour comes from `accent` in data.js. */
+.project-mono {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 96px;
+  height: 96px;
+  font-family: "Press Start 2P", monospace;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--purple);
+  background: rgba(20,20,27,0.6);
+  border: 2px dashed currentColor;
+  border-radius: 6px;
+  text-shadow: 0 0 14px currentColor;
+  user-select: none;
+}
+.project-mono::after {
+  content: "";
+  position: absolute;
+  right: -7px; bottom: -7px;
+  width: 10px; height: 10px;
+  background: currentColor;
+  box-shadow: 3px 3px 0 var(--pink);
+}
+.project-mono--purple { color: var(--purple); }
+.project-mono--cyan   { color: var(--cyan);   }
+.project-mono--green  { color: var(--green);  }
+.project-mono--yellow { color: var(--yellow); }
+.project-mono--pink   { color: var(--pink);   }
+.project-mono--pink::after { box-shadow: 3px 3px 0 var(--purple); }
+
 .project-body { padding: 16px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+
+/* Who it was for and what I was there. Work cards only. */
+.project-kicker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  margin: 0;
+  font-family: var(--label-family);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+.project-role {
+  padding: 2px 7px;
+  font-size: 10px;
+  color: var(--cyan);
+  border: 1px solid rgba(128,255,234,0.4);
+  border-radius: 3px;
+  letter-spacing: 0.1em;
+}
+
 .project-title {
   margin: 0;
   font-family: var(--label-family);
@@ -855,27 +943,78 @@ main { position: relative; z-index: 10; }
   border-radius: 3px;
   letter-spacing: 0.02em;
 }
-.project-cta {
+
+/* Buttons: Details (filled) opens the modal, the link (outlined) leaves the
+   site. Same box for <button> and <a> so the row lines up. */
+.project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
   margin-top: 6px;
-  align-self: flex-start;
+}
+.project-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   padding: 8px 14px;
   font-family: var(--label-family);
   font-size: 12px;
   font-weight: 700;
+  line-height: 1.2;
   text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.project-btn--primary {
   color: var(--ink);
   background: var(--yellow);
   border: 1px solid var(--yellow);
-  border-radius: 3px;
-  letter-spacing: 0.1em;
-  transition: transform 0.12s ease, box-shadow 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
 }
-.project-cta:hover {
+.project-btn--primary:hover,
+.project-btn--primary:focus-visible {
   color: var(--ink);
   background: var(--pink);
   border-color: var(--pink);
   transform: translate(-2px,-2px);
   box-shadow: 4px 4px 0 rgba(255,128,191,0.4);
+}
+.project-btn--ghost {
+  color: var(--cyan);
+  background: transparent;
+  border: 1px solid rgba(128,255,234,0.45);
+}
+.project-btn--ghost:hover,
+.project-btn--ghost:focus-visible {
+  color: var(--ink);
+  background: var(--cyan);
+  border-color: var(--cyan);
+  transform: translate(-2px,-2px);
+  box-shadow: 4px 4px 0 rgba(128,255,234,0.35);
+}
+.project-btn:focus-visible { outline: 2px solid var(--purple); outline-offset: 2px; }
+
+/* Where a link would go when there is none to give. */
+.project-status {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 7px;
+  margin: 0;
+  font-family: var(--label-family);
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+.project-status::before {
+  content: "";
+  flex: none;
+  margin-top: 5px;              /* sits on the first line when the text wraps */
+  width: 6px; height: 6px;
+  background: var(--muted);
+  opacity: 0.7;
 }
 
 .projects-more {
@@ -889,6 +1028,199 @@ main { position: relative; z-index: 10; }
   text-transform: uppercase;
   color: var(--cyan);
   letter-spacing: 0.12em;
+}
+
+/* ---------- Project details modal ----------
+   A native <dialog> dressed as a terminal window: same header as the hero
+   terminal, a scrolling body and a footer with the actions. The dialog sits
+   in the top layer, above the fixed CRT overlay, so the window paints its
+   own scanlines to stay in character (and drops them with .crt-off). */
+
+.project-modal {
+  padding: 0;
+  margin: auto;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  width: min(760px, calc(100vw - 32px));
+  max-height: min(88vh, 920px);
+  overflow: visible;
+}
+.project-modal[open] { display: flex; }
+.project-modal::backdrop {
+  background: rgba(20,20,27,0.78);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: pm-fade 0.2s ease both;
+}
+body.modal-open { overflow: hidden; }
+
+.pm-window {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: min(88vh, 920px);
+  background: rgba(20,20,27,0.97);
+  border: 1px solid var(--edge);
+  border-radius: 8px;
+  box-shadow: 0 0 40px rgba(0,0,0,0.55), 0 0 26px rgba(189,147,249,0.22), 6px 6px 0 rgba(189,147,249,0.25);
+  overflow: hidden;
+  animation: pm-in 0.26s cubic-bezier(0.2, 0.8, 0.25, 1) both;
+}
+.pm-window::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  background:
+    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.22) 50%),
+    linear-gradient(90deg, rgba(255, 0, 0, 0.05), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.05));
+  background-size: 100% 2px, 3px 100%;
+}
+body.crt-off .pm-window::after { display: none; }
+
+@keyframes pm-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pm-in {
+  from { opacity: 0; transform: translateY(14px) scale(0.98); }
+  to   { opacity: 1; transform: none; }
+}
+
+.pm-head { flex: none; }
+.pm-close {
+  margin-left: auto;
+  display: grid;
+  place-items: center;
+  width: 28px; height: 28px;
+  font-family: var(--label-family);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+}
+.pm-close:hover,
+.pm-close:focus-visible {
+  color: var(--text);
+  border-color: rgba(255,85,85,0.6);
+  background: rgba(255,85,85,0.12);
+  outline: none;
+}
+
+.pm-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 24px 26px 8px;
+  overscroll-behavior: contain;
+}
+
+.pm-hero {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  padding-bottom: 20px;
+  margin-bottom: 18px;
+  border-bottom: 1px dashed rgba(184,184,196,0.2);
+}
+.pm-logo {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 84px; height: 84px;
+  padding: 8px;
+  background: linear-gradient(135deg, #282A36, #14141B);
+  border: 1px solid var(--edge);
+  border-radius: 8px;
+}
+.pm-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.pm-logo .project-mono { width: 64px; height: 64px; font-size: 16px; }
+.pm-logo .project-mono::after { right: -5px; bottom: -5px; width: 8px; height: 8px; }
+.pm-heading { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.pm-kicker {
+  margin: 0;
+  font-family: var(--label-family);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+}
+.pm-kicker strong { color: var(--pink); font-weight: 700; }
+.pm-title {
+  margin: 0;
+  font-family: "Press Start 2P", monospace;
+  font-size: clamp(13px, 2.4vw, 17px);
+  line-height: 1.5;
+  color: var(--green);
+  text-shadow: 0 0 18px rgba(138,255,128,0.3);
+  overflow-wrap: anywhere;
+}
+.pm-tagline { margin: 0; font-size: 14px; line-height: 1.7; color: var(--text); }
+.pm-hero .project-status { margin-top: 2px; }
+
+.pm-section { margin: 0 0 20px; }
+.pm-h {
+  margin: 0 0 10px;
+  font-family: var(--label-family);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--pink);
+}
+.pm-h::before { content: "// "; color: var(--purple); }
+.pm-section p {
+  margin: 0 0 10px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+}
+.pm-section p:last-child { margin-bottom: 0; }
+.pm-list {
+  margin: 0; padding: 0; list-style: none;
+  display: grid; gap: 8px;
+}
+.pm-list li {
+  position: relative;
+  padding-left: 20px;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--text);
+}
+.pm-list li::before {
+  content: "";
+  position: absolute; left: 3px; top: 9px;
+  width: 7px; height: 7px;
+  background: var(--purple);
+  box-shadow: 2px 2px 0 var(--pink);
+}
+.pm-section .project-tags { gap: 7px; }
+
+.pm-foot {
+  flex: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 14px 26px;
+  background: var(--surface);
+  border-top: 1px solid var(--edge);
+}
+
+@media (max-width: 560px) {
+  .project-modal { width: calc(100vw - 20px); max-height: 92vh; }
+  .pm-window { max-height: 92vh; }
+  .pm-body { padding: 18px 16px 4px; }
+  .pm-foot { padding: 12px 16px; }
+  .pm-hero { gap: 14px; }
+  .pm-logo { width: 64px; height: 64px; padding: 6px; }
+  .pm-logo .project-mono { width: 48px; height: 48px; font-size: 12px; }
+  .pm-foot .project-btn { flex: 1 1 auto; justify-content: center; }
 }
 
 /* ---------- Contact ---------- */
@@ -1007,4 +1339,5 @@ main { position: relative; z-index: 10; }
   }
   .bubble { display: none; }
   [data-reveal].reveal-hidden { opacity: 1; transform: none; filter: none; }
+  .pm-window, .project-modal::backdrop { animation: none; }
 }

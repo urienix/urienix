@@ -35,6 +35,19 @@ python3 -m http.server 8000
 - Copy in `assets/js/i18n.js`: one flat dictionary per language.
 - Colors and typography in `:root` inside `assets/css/style.css`.
 
+### Projects
+
+`data.js` splits projects into two groups, `projects.work` (client and
+employer work) and `projects.personal` (side quests). Each one renders as a
+card with a **Details** button that opens a modal built from its `details`
+block (`about`, `responsibilities`, `achievements`) plus `stack` and `href`.
+
+- **Logo:** set `img: 'assets/img/<file>'`. Without it the card shows a pixel
+  monogram from `mono` (initials) in the `accent` color, meant as a stand-in
+  until the real logo arrives.
+- **No public link:** leave `href` out and set `status` to `internal`,
+  `offline` or `advisory`; the card prints a note instead of a link.
+
 ## Deploy
 
 The `CNAME` file points at **urienix.moe**. GitHub Pages serves this repo

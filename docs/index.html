@@ -297,14 +297,30 @@
         <p class="section-kicker" data-i18n="projects.kicker">// selected work &amp; side quests</p>
       </header>
 
-      <div class="projects-grid" id="projects-grid"></div>
+      <!-- Real-world work: client and employer projects, most recent first. -->
+      <div class="projects-group" id="projects-work">
+        <header class="projects-group-head">
+          <h3 class="projects-group-title" data-i18n="projects.work.title">Real-world projects</h3>
+          <p class="projects-group-note" data-i18n="projects.work.note">// things I shipped for clients and employers · most recent first</p>
+        </header>
+        <div class="projects-grid" id="projects-grid-work"></div>
+      </div>
 
-      <p class="projects-more">
-        <a href="https://github.com/urienix?tab=repositories" target="_blank" rel="noopener">
-          <span data-i18n="projects.more">See more on GitHub</span>
-          <span aria-hidden="true">→</span>
-        </a>
-      </p>
+      <!-- Side quests: libraries, experiments and playgrounds. -->
+      <div class="projects-group" id="projects-personal">
+        <header class="projects-group-head">
+          <h3 class="projects-group-title" data-i18n="projects.personal.title">Personal projects</h3>
+          <p class="projects-group-note" data-i18n="projects.personal.note">// side quests, libraries &amp; experiments</p>
+        </header>
+        <div class="projects-grid" id="projects-grid-personal"></div>
+
+        <p class="projects-more">
+          <a href="https://github.com/urienix?tab=repositories" target="_blank" rel="noopener">
+            <span data-i18n="projects.more">See more on GitHub</span>
+            <span aria-hidden="true">→</span>
+          </a>
+        </p>
+      </div>
     </section>
 
     <!-- ============================= CONTACT ============================= -->
@@ -353,6 +369,28 @@
     <span class="dot" aria-hidden="true">·</span>
     <a href="https://github.com/urienix/urienix" target="_blank" rel="noopener" data-i18n="footer.source">Source</a>
   </footer>
+
+  <!-- Project details. A native <dialog>: Esc closes it, focus stays inside
+       and the backdrop comes for free. main.js fills .pm-body and .pm-foot
+       from data.js each time a Details button is pressed (and again when the
+       language changes while it is open). -->
+  <dialog class="project-modal" id="project-modal" aria-labelledby="pm-title">
+    <div class="pm-window">
+      <div class="term-head pm-head">
+        <span class="term-dot term-dot--red"></span>
+        <span class="term-dot term-dot--yellow"></span>
+        <span class="term-dot term-dot--green"></span>
+        <span class="term-title" id="pm-path">urienix@moe:~/projects$</span>
+        <button type="button" class="pm-close" data-modal-close
+                aria-label="Close" title="Close (Esc)"
+                data-i18n-title="modal.closeTitle" data-i18n-aria="modal.close">
+          <span aria-hidden="true">✕</span>
+        </button>
+      </div>
+      <div class="pm-body" id="pm-body"></div>
+      <div class="pm-foot" id="pm-foot"></div>
+    </div>
+  </dialog>
 
   <script src="./assets/js/data.js"></script>
   <script src="./assets/js/i18n.js"></script>
