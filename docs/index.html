@@ -37,48 +37,15 @@
   />
 
   <!-- Marca que hay JS antes de que cargue nada mas. La terminal se escribe
-       sola, y sin esto sus lineas asomarian enteras hasta que el script
+       sola, y sin esto sus lineas asomarian enteras hasta que main.js
        arrancase, solo para borrarse de golpe. Sin JS no se pone la clase y el
        texto se lee tal cual. -->
   <script>document.documentElement.classList.add('js');</script>
 
-  <!-- Tailwind (CDN) with Dracula palette + pixel fonts -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            ink:    '#14141B',
-            panel:  '#1F1F2A',
-            surface:'#282A36',
-            edge:   '#44475A',
-            text:   '#F8F8F2',
-            muted:  '#B8B8C4',
-            cyan:   '#80FFEA',
-            green:  '#8AFF80',
-            yellow: '#F1FA8C',
-            pink:   '#FF80BF',
-            purple: '#BD93F9',
-            red:    '#FF5555',
-          },
-          fontFamily: {
-            pixel: ['"Press Start 2P"', 'monospace'],
-            mono:  ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
-          },
-          boxShadow: {
-            glow:   '0 0 20px 3px rgba(189,147,249,0.35)',
-            pixel:  '4px 4px 0 rgba(189,147,249,0.35)',
-          },
-        },
-      },
-    };
-  </script>
-
   <link rel="stylesheet" href="./assets/css/style.css" />
 </head>
 
-<body class="bg-ink text-text font-mono antialiased">
+<body>
 
   <!-- Layered background -->
   <div class="bg-layer bg-grid"      aria-hidden="true"></div>
