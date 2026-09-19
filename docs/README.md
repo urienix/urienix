@@ -1,7 +1,8 @@
 # urienix.moe
 
-Personal website of Jairo Medrano (Urienix): vanilla HTML, CSS and JavaScript
-with Tailwind (via CDN). No bundler, no framework, no build step.
+Personal website of Jairo Medrano (Urienix): vanilla HTML, CSS and JavaScript.
+No bundler, no framework, no build step, no runtime dependencies beyond the
+fonts.
 
 ## Layout
 

@@ -17,8 +17,9 @@
   ];
   var SKILLS = DATA.skills || [];
 
-  var STORAGE_LANG = 'urienix-lang';
-  var STORAGE_CRT  = 'urienix-crt';
+  var STORAGE_LANG  = 'urienix-lang';
+  var STORAGE_CRT   = 'urienix-crt';
+  var STORAGE_TYPED = 'urienix-typed';   // session only: the show was already seen
 
   var currentLang = 'en';
 
@@ -29,6 +30,8 @@
   function on (el, ev, fn) { el && el.addEventListener(ev, fn); }
   function readLS (k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function writeLS (k, v) { try { localStorage.setItem(k, v); } catch (e) { /* private mode */ } }
+  function readSS (k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } }
+  function writeSS (k, v) { try { sessionStorage.setItem(k, v); } catch (e) { /* private mode */ } }
 
   function detectLang () {
     var url = new URLSearchParams(window.location.search).get('lang');
@@ -801,9 +804,14 @@
 
      Re-running is the normal case, not the exception: every language repaint
      calls this again, so each run takes a ticket and older runs stop as soon
-     as they notice a newer one exists. */
+     as they notice a newer one exists.
 
-  var typeTicket = 0;
+     Two mercies for whoever has seen it already: a click on the terminal
+     finishes the typing at once, and within the same browser session every
+     later run (a reload, a language switch) types at triple speed. */
+
+  var typeTicket  = 0;
+  var finishTyping = null;      // set by the run in progress, cleared when it ends
 
   function typeTerminal () {
     var body  = $('.term-body');
@@ -822,45 +830,84 @@
     // slicing those down the middle paints half a character.
     lines.forEach(function (l) { l.chars = Array.from(l.span.textContent); });
 
-    // From here on the lines are ours to show; the stylesheet keeps them
-    // hidden until this class says the script is driving.
-    body.classList.add('is-live');
-
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      body.classList.add('is-live');
       if (caret) last.p.appendChild(caret);
       return;                       // i18n already left the full text in place
     }
 
-    // Freeze each line at the height it has while full. Emptying them would
-    // otherwise collapse the block and drag everything below it upwards.
-    lines.forEach(function (l) {
-      l.p.style.minHeight = l.p.getBoundingClientRect().height + 'px';
-      l.span.textContent = '';
-    });
-    body.setAttribute('aria-busy', 'true');
+    function begin () {
+      if (ticket !== typeTicket) return;      // a newer run took over meanwhile
 
-    var li = 0, ci = 0;
+      // From here on the lines are ours to show; the stylesheet keeps them
+      // hidden until this class says the script is driving.
+      body.classList.add('is-live');
 
-    function step () {
-      if (ticket !== typeTicket) return;      // a newer run took over
+      var seen = readSS(STORAGE_TYPED) === '1';
+      writeSS(STORAGE_TYPED, '1');
+      var charMin   = seen ? 2  : 7;
+      var charJitter= seen ? 4  : 10;
+      var linePause = seen ? 50 : 170;
 
-      var line = lines[li];
-      if (caret && caret.parentNode !== line.p) line.p.appendChild(caret);
+      // Freeze each line at the height it has while full. Emptying them would
+      // otherwise collapse the block and drag everything below it upwards.
+      lines.forEach(function (l) {
+        l.p.style.minHeight = l.p.getBoundingClientRect().height + 'px';
+        l.span.textContent = '';
+      });
+      body.setAttribute('aria-busy', 'true');
 
-      if (ci < line.chars.length) {
-        line.span.textContent += line.chars[ci++];
-        window.setTimeout(step, 8 + Math.random() * 11);
-        return;
+      function settle () {
+        lines.forEach(function (l) { l.p.style.minHeight = ''; });
+        body.removeAttribute('aria-busy');
+        finishTyping = null;
       }
 
-      li++; ci = 0;
-      if (li < lines.length) { window.setTimeout(step, 170); return; }
+      finishTyping = function () {
+        if (ticket !== typeTicket) return;    // belongs to an older run
+        typeTicket++;                         // and this stops the loop below
+        lines.forEach(function (l) { l.span.textContent = l.chars.join(''); });
+        if (caret) last.p.appendChild(caret);
+        settle();
+      };
 
-      lines.forEach(function (l) { l.p.style.minHeight = ''; });
-      body.removeAttribute('aria-busy');
+      var li = 0, ci = 0;
+
+      function step () {
+        if (ticket !== typeTicket) return;    // a newer run took over
+
+        var line = lines[li];
+        if (caret && caret.parentNode !== line.p) line.p.appendChild(caret);
+
+        if (ci < line.chars.length) {
+          line.span.textContent += line.chars[ci++];
+          window.setTimeout(step, charMin + Math.random() * charJitter);
+          return;
+        }
+
+        li++; ci = 0;
+        if (li < lines.length) { window.setTimeout(step, linePause); return; }
+
+        settle();
+      }
+
+      window.setTimeout(step, seen ? 100 : 300);
     }
 
-    window.setTimeout(step, 300);
+    // The frozen heights come from a measurement, and the web font changes
+    // how the lines wrap: measure only once the fonts are in, or the box
+    // grows by a line when JetBrains Mono lands halfway through the typing.
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(begin, begin);
+    } else {
+      begin();
+    }
+  }
+
+  function initTerminalSkip () {
+    on($('.terminal'), 'click', function () {
+      if (finishTyping) finishTyping();
+    });
   }
 
   /* ---------- Coin toss ----------
@@ -935,6 +982,7 @@
     initProjectModal();
     initSkillFilter();
     initCopyEmail();
+    initTerminalSkip();
     initYear();
 
     // If the URL loaded with a hash, browsers usually scroll for us — but they

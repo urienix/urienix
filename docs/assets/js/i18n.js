@@ -7,7 +7,7 @@ window.URIENIX_I18N = {
   en: {
     'html.lang':        'en',
     'doc.title':        'Urienix · Jairo Medrano · Software Engineer',
-    'meta.description': 'Personal site of Jairo Medrano (Urienix): full-stack software engineer focused on backend, cloud and distributed systems.',
+    'meta.description': 'Jairo Medrano (Urienix): backend, realtime and integrations engineer. 7+ years shipping for teams in the US and Honduras, remote from Tegucigalpa.',
 
     'nav.about':    'About',
     'nav.career':   'Career',
@@ -17,12 +17,15 @@ window.URIENIX_I18N = {
 
     'tools.crt':    'Toggle CRT effect',
 
-    'hero.role':   'Software Engineer',
+    'hero.role':   'Software Engineer · Backend & Integrations',
     'hero.line1':  "Hi! I'm Jairo Medrano, also known as Urienix.",
-    'hero.line2':  'Full-stack software engineer, backend & cloud enthusiast.',
-    'hero.line3':  'Building things with Node.js, TypeScript, React and Flutter.',
-    'hero.line4':  'Powered by coffee ☕ and pancakes 🥞.',
-    'hero.line5':  'Welcome to my little corner of the internet.',
+    'hero.line2':  "I build backends and what's around them: APIs, realtime, integrations.",
+    'hero.line3':  '7+ years shipping for teams in the US and Honduras, from GMT-6.',
+    'hero.line4':  'Tech lead at Higher Honduras by day; side quests by night.',
+    'hero.line5':  'Powered by coffee ☕ and pancakes 🥞. Come on in.',
+    'hero.skip':   'Click to skip the typing',
+    'hero.cta.work':    'See the work',
+    'hero.cta.contact': 'Get in touch',
     'hero.scroll': 'scroll',
 
     'about.title':    'About',
@@ -130,7 +133,7 @@ window.URIENIX_I18N = {
   es: {
     'html.lang':        'es',
     'doc.title':        'Urienix · Jairo Medrano · Ingeniero de Software',
-    'meta.description': 'Sitio personal de Jairo Medrano (Urienix): ingeniero de software full-stack enfocado en backend, cloud y sistemas distribuidos.',
+    'meta.description': 'Jairo Medrano (Urienix): ingeniero de backend, tiempo real e integraciones. 7+ años lanzando software para equipos de EE. UU. y Honduras, en remoto desde Tegucigalpa.',
 
     'nav.about':    'Sobre mí',
     'nav.career':   'Trayectoria',
@@ -140,12 +143,15 @@ window.URIENIX_I18N = {
 
     'tools.crt':    'Activar efecto CRT',
 
-    'hero.role':   'Ingeniero de Software',
+    'hero.role':   'Ingeniero de Software · Backend e Integraciones',
     'hero.line1':  '¡Hola! Soy Jairo Medrano, también conocido como Urienix.',
-    'hero.line2':  'Ingeniero de software full-stack, entusiasta del backend y la nube.',
-    'hero.line3':  'Construyo cosas con Node.js, TypeScript, React y Flutter.',
-    'hero.line4':  'Alimentado por café ☕ y panqueques 🥞.',
-    'hero.line5':  'Bienvenido a mi pequeño rincón de internet.',
+    'hero.line2':  'Construyo backends y lo que los rodea: APIs, tiempo real, integraciones.',
+    'hero.line3':  '7+ años lanzando para equipos de EE. UU. y Honduras, desde GMT-6.',
+    'hero.line4':  'Tech lead en Higher Honduras de día; misiones secundarias de noche.',
+    'hero.line5':  'Alimentado por café ☕ y panqueques 🥞. Pasa adelante.',
+    'hero.skip':   'Clic para saltar el tecleo',
+    'hero.cta.work':    'Ver el trabajo',
+    'hero.cta.contact': 'Hablemos',
     'hero.scroll': 'scroll',
 
     'about.title':    'Sobre mí',

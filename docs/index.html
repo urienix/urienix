@@ -6,7 +6,7 @@
   <title>Urienix · Jairo Medrano · Software Engineer</title>
 
   <meta name="description" data-i18n="meta.description"
-        content="Personal site of Jairo Medrano (Urienix): full-stack software engineer focused on backend, cloud and distributed systems." />
+        content="Jairo Medrano (Urienix): backend, realtime and integrations engineer. 7+ years shipping for teams in the US and Honduras, remote from Tegucigalpa." />
   <meta name="author" content="Jairo Medrano" />
   <meta name="theme-color" content="#14141B" />
   <meta name="robots" content="index, follow" />
@@ -15,14 +15,14 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://urienix.moe/" />
   <meta property="og:title" content="Urienix · Jairo Medrano" />
-  <meta property="og:description" content="Software engineer building web, mobile and cloud-native apps." />
+  <meta property="og:description" content="Backend, realtime and integrations engineer. 7+ years shipping for teams in the US and Honduras." />
   <meta property="og:image" content="./assets/img/urienix.png" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:creator" content="@urienix" />
   <meta name="twitter:title" content="Urienix · Jairo Medrano" />
-  <meta name="twitter:description" content="Software engineer building web, mobile and cloud-native apps." />
+  <meta name="twitter:description" content="Backend, realtime and integrations engineer. 7+ years shipping for teams in the US and Honduras." />
   <meta name="twitter:image" content="./assets/img/urienix.png" />
 
   <link rel="icon" type="image/x-icon" href="./favicon.ico" />
@@ -37,48 +37,15 @@
   />
 
   <!-- Marca que hay JS antes de que cargue nada mas. La terminal se escribe
-       sola, y sin esto sus lineas asomarian enteras hasta que el script
+       sola, y sin esto sus lineas asomarian enteras hasta que main.js
        arrancase, solo para borrarse de golpe. Sin JS no se pone la clase y el
        texto se lee tal cual. -->
   <script>document.documentElement.classList.add('js');</script>
 
-  <!-- Tailwind (CDN) with Dracula palette + pixel fonts -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            ink:    '#14141B',
-            panel:  '#1F1F2A',
-            surface:'#282A36',
-            edge:   '#44475A',
-            text:   '#F8F8F2',
-            muted:  '#B8B8C4',
-            cyan:   '#80FFEA',
-            green:  '#8AFF80',
-            yellow: '#F1FA8C',
-            pink:   '#FF80BF',
-            purple: '#BD93F9',
-            red:    '#FF5555',
-          },
-          fontFamily: {
-            pixel: ['"Press Start 2P"', 'monospace'],
-            mono:  ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
-          },
-          boxShadow: {
-            glow:   '0 0 20px 3px rgba(189,147,249,0.35)',
-            pixel:  '4px 4px 0 rgba(189,147,249,0.35)',
-          },
-        },
-      },
-    };
-  </script>
-
   <link rel="stylesheet" href="./assets/css/style.css" />
 </head>
 
-<body class="bg-ink text-text font-mono antialiased">
+<body>
 
   <!-- Layered background -->
   <div class="bg-layer bg-grid"      aria-hidden="true"></div>
@@ -137,11 +104,13 @@
         <h1 class="hero-title" data-glitch="Jairo Medrano">Jairo Medrano</h1>
         <p class="hero-role">
           <span class="brk">[</span>
-          <span data-i18n="hero.role">Software Engineer</span>
+          <span data-i18n="hero.role">Software Engineer · Backend &amp; Integrations</span>
           <span class="brk">]</span>
         </p>
 
-        <div class="terminal" role="region" aria-label="Terminal">
+        <!-- A click anywhere on the terminal finishes the typing at once. -->
+        <div class="terminal" role="region" aria-label="Terminal"
+             title="Click to skip the typing" data-i18n-title="hero.skip">
           <div class="term-head">
             <span class="term-dot term-dot--red"></span>
             <span class="term-dot term-dot--yellow"></span>
@@ -150,11 +119,22 @@
           </div>
           <div class="term-body">
             <p><span class="prompt">&gt;</span> <span data-i18n="hero.line1">Hi! I'm Jairo Medrano, also known as Urienix.</span></p>
-            <p><span class="prompt">&gt;</span> <span data-i18n="hero.line2">Full-stack software engineer, backend &amp; cloud enthusiast.</span></p>
-            <p><span class="prompt">&gt;</span> <span data-i18n="hero.line3">Building things with Node.js, TypeScript, React and Flutter.</span></p>
-            <p><span class="prompt">&gt;</span> <span data-i18n="hero.line4">Powered by coffee ☕ and pancakes 🥞.</span></p>
-            <p><span class="prompt">&gt;</span> <span data-i18n="hero.line5">Welcome to my little corner of the internet.</span><span class="caret" aria-hidden="true">_</span></p>
+            <p><span class="prompt">&gt;</span> <span data-i18n="hero.line2">I build backends and what's around them: APIs, realtime, integrations.</span></p>
+            <p><span class="prompt">&gt;</span> <span data-i18n="hero.line3">7+ years shipping for teams in the US and Honduras, from GMT-6.</span></p>
+            <p><span class="prompt">&gt;</span> <span data-i18n="hero.line4">Tech lead at Higher Honduras by day; side quests by night.</span></p>
+            <p><span class="prompt">&gt;</span> <span data-i18n="hero.line5">Powered by coffee ☕ and pancakes 🥞. Come on in.</span><span class="caret" aria-hidden="true">_</span></p>
           </div>
+        </div>
+
+        <div class="hero-actions">
+          <a class="cta" href="#projects">
+            <span data-i18n="hero.cta.work">See the work</span>
+            <span aria-hidden="true">→</span>
+          </a>
+          <a class="cta cta--ghost" href="#contact">
+            <span class="cta-icon" aria-hidden="true">✉</span>
+            <span data-i18n="hero.cta.contact">Get in touch</span>
+          </a>
         </div>
 
         <ul class="socials" aria-label="Social links">
@@ -283,9 +263,12 @@
            chips generated by main.js from data.js. Every chip points at the
            projects that back it; click one and those cards light up. -->
       <div class="skills-core" data-reveal>
+        <!-- Sized up front: without width/height the row is 0px tall until
+             it lazy-loads, and the page shifts by 48px under a scroll in
+             progress (Firefox aims anchor scrolls at the pre-shift spot). -->
         <img src="https://skillicons.dev/icons?i=ts,nodejs,nestjs,react,nextjs,flutter,mongodb,mysql,aws,docker,nginx,linux&perline=12"
              alt="Core stack: TypeScript, Node.js, NestJS, React, Next.js, Flutter, MongoDB, MySQL, AWS, Docker, Nginx, Linux"
-             loading="lazy" />
+             width="667" height="48" loading="lazy" />
         <p class="skills-core-note" data-i18n="skills.core.note">// daily drivers · every chip below points to the projects that prove it</p>
       </div>
 
