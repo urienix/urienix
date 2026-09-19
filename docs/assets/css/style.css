@@ -1589,6 +1589,70 @@ body.crt-off .pm-window::after { display: none; }
 }
 .cta-icon { color: var(--ink); font-size: 12px; }
 
+/* Three ways in, side by side. The ghost variant is the same box, outlined. */
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.contact-actions .cta { align-self: auto; }
+.cta--ghost {
+  color: var(--cyan);
+  background: transparent;
+  border-color: rgba(128,255,234,0.45);
+  box-shadow: none;
+  cursor: pointer;
+}
+.cta--ghost .cta-icon { color: inherit; }
+.cta--ghost:hover,
+.cta--ghost:focus-visible {
+  color: var(--ink);
+  background: var(--cyan);
+  border-color: var(--cyan);
+  box-shadow: 6px 6px 0 rgba(128,255,234,0.3);
+  outline: none;
+}
+.cta.is-copied,
+.cta.is-copied:hover {
+  color: var(--ink);
+  background: var(--green);
+  border-color: var(--green);
+  box-shadow: 6px 6px 0 rgba(138,255,128,0.3);
+}
+.cta-ic { width: 14px; height: 14px; }
+
+.contact-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  margin: -4px 0 0;
+  font-family: var(--label-family);
+  font-size: 12.5px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+/* What makes a work email easy to answer. */
+.contact-tips {
+  padding: 14px 16px;
+  background: rgba(20,20,27,0.5);
+  border: 1px dashed rgba(184,184,196,0.2);
+}
+.contact-h {
+  margin: 0 0 10px;
+  font-family: var(--label-family);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--yellow);
+}
+.contact-tips .dot-list li { font-size: 13.5px; }
+
+@media (max-width: 480px) {
+  .contact-actions .cta { flex: 1 1 auto; justify-content: center; }
+}
+
 .contact-list {
   display: grid;
   gap: 10px;

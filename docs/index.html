@@ -343,17 +343,46 @@
 
       <div class="contact-card">
         <p class="contact-lead" data-i18n="contact.lead">
-          Have an idea, a role or just want to say hi? My inbox is always open.
+          Building something and need a backend, an integration or a hand leading a small team?
+          Or just want to say hi. Either way, my inbox is open.
         </p>
-        <a class="cta" href="mailto:urienix@hotmail.com">
-          <span class="cta-icon" aria-hidden="true">✉</span>
-          <span>urienix@hotmail.com</span>
-        </a>
+
+        <!-- Three ways in. The mailto gets its subject from the dictionary so
+             the mail arrives recognisable; the copy button is there for the
+             many desktops with no mail client wired up. -->
+        <div class="contact-actions">
+          <a class="cta" id="contact-mail" href="mailto:urienix@hotmail.com?subject=Hi%20from%20urienix.moe">
+            <span class="cta-icon" aria-hidden="true">✉</span>
+            <span data-i18n="contact.cta.mail">Email me</span>
+          </a>
+          <button type="button" class="cta cta--ghost" id="copy-email" data-email="urienix@hotmail.com">
+            <span class="cta-icon" aria-hidden="true">⧉</span>
+            <span class="copy-label" data-i18n="contact.cta.copy" aria-live="polite">Copy address</span>
+          </button>
+          <a class="cta cta--ghost" href="https://www.linkedin.com/in/urienix" target="_blank" rel="noopener">
+            <i class="ic ic-linkedin cta-ic" aria-hidden="true"></i>
+            <span data-i18n="contact.cta.linkedin">LinkedIn</span>
+          </a>
+        </div>
+
+        <p class="contact-status">
+          <span class="badge-open" data-i18n="about.remote.badge">OPEN</span>
+          <span data-i18n="contact.status">to remote consulting and contract work · GMT-6</span>
+        </p>
+
+        <div class="contact-tips">
+          <h3 class="contact-h" data-i18n="contact.tips.title">// good to include if it's work</h3>
+          <ul class="dot-list">
+            <li data-i18n="contact.tips.what">What you're building and where it is today.</li>
+            <li data-i18n="contact.tips.stack">The stack, and what needs to talk to what.</li>
+            <li data-i18n="contact.tips.when">The rough timeline.</li>
+          </ul>
+        </div>
 
         <ul class="contact-list">
           <li>
-            <span class="k" data-i18n="contact.k.web">Website</span>
-            <a href="https://urienix.moe">urienix.moe</a>
+            <span class="k" data-i18n="contact.k.mail">Email</span>
+            <a href="mailto:urienix@hotmail.com" id="contact-email">urienix@hotmail.com</a>
           </li>
           <li>
             <span class="k" data-i18n="contact.k.gh">GitHub</span>
@@ -364,8 +393,8 @@
             <a href="https://www.linkedin.com/in/urienix" target="_blank" rel="noopener">/in/urienix</a>
           </li>
           <li>
-            <span class="k" data-i18n="contact.k.loc">Location</span>
-            <span>Tegucigalpa, Honduras 🇭🇳</span>
+            <span class="k" data-i18n="contact.k.x">X</span>
+            <a href="https://x.com/urienix" target="_blank" rel="noopener">@urienix</a>
           </li>
         </ul>
       </div>
