@@ -707,8 +707,9 @@ window.URIENIX_DATA = {
         img: 'assets/img/coinroom.png',
         mono: 'CR',
         accent: 'yellow',
-        href: 'https://coinroom.urienix.moe',
-        cta: { en: 'Open chat', es: 'Abrir chat' },
+        status: 'offline',
+        href: 'https://github.com/urienix/thecoinroom',
+        cta: { en: 'Source', es: 'Ver código' },
         desc: {
           en: 'Real-time chat playground built on socket.io. Small, fast, and unashamedly fun.',
           es: 'Chat en tiempo real hecho sobre socket.io. Pequeño, rápido y divertido sin pena.',
@@ -717,10 +718,12 @@ window.URIENIX_DATA = {
         details: {
           about: {
             en: [
-              'A tiny real-time chat built on Socket.IO to play with rooms and live message broadcasting. It runs on a subdomain of this site.',
+              'A tiny real-time chat built on Socket.IO to play with rooms and live message broadcasting. It lived on a subdomain of this site for a while.',
+              'The hosted version was taken down because keeping the server up cost money. The code is still on GitHub, ready to run locally.',
             ],
             es: [
-              'Un chat en tiempo real pequeñito hecho sobre Socket.IO para jugar con salas y difusión de mensajes en vivo. Corre en un subdominio de este sitio.',
+              'Un chat en tiempo real pequeñito hecho sobre Socket.IO para jugar con salas y difusión de mensajes en vivo. Vivió un tiempo en un subdominio de este sitio.',
+              'La versión en línea se dio de baja porque mantener el servidor costaba dinero. El código sigue en GitHub, listo para correrlo en local.',
             ],
           },
           responsibilities: {
@@ -733,10 +736,10 @@ window.URIENIX_DATA = {
           },
           achievements: {
             en: [
-              'Still running as a public playground.',
+              'Ran as a public playground while it was online; source available on GitHub.',
             ],
             es: [
-              'Sigue en línea como patio de juegos público.',
+              'Funcionó como patio de juegos público mientras estuvo en línea; código disponible en GitHub.',
             ],
           },
         },
