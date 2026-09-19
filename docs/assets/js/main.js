@@ -1,8 +1,8 @@
 /* ============================================================
    Urienix — main.js
-   i18n · timeline & projects render · project details modal ·
-   skills chips & project highlight · bubbles · glitch · scrollspy ·
-   reveal · CRT toggle · coin toss · terminal typing
+   i18n · glance stats · timeline & projects render · project details
+   modal · skills chips & project highlight · bubbles · glitch ·
+   scrollspy · reveal · CRT toggle · coin toss · terminal typing
    ============================================================ */
 
 (function () {
@@ -87,6 +87,7 @@
         btn.setAttribute('aria-pressed', String(btn.getAttribute('data-set-lang') === lang));
       });
 
+      renderGlance();
       renderTimeline();
       renderProjects();
       applyProjectFilter();      // cards were rebuilt; put the highlight back
@@ -112,6 +113,48 @@
         applyLang(lang, true);
       });
     });
+  }
+
+  /* ---------- Render: glance stats ----------
+     The "player stats" tiles in About. Everything is counted from data.js
+     so the numbers keep up with the projects list by themselves; the two
+     years come from `profile`. */
+
+  function hasTag (p, needle) {
+    return (p.tags || []).concat(p.stack || []).some(function (x) {
+      return x.toLowerCase().indexOf(needle) >= 0;
+    });
+  }
+
+  function renderGlance () {
+    var host = $('#glance');
+    if (!host) return;
+
+    var profile = DATA.profile || {};
+    var all     = allProjects();
+    var work    = PROJECTS.work || [];
+    var year    = new Date().getFullYear();
+
+    var clients = [];
+    work.forEach(function (p) {
+      if (p.client && clients.indexOf(p.client) < 0) clients.push(p.client);
+    });
+
+    var stats = [
+      { value: profile.careerSince ? (year - profile.careerSince) + '+' : null, label: t('about.glance.years') },
+      { value: all.length,                                                    label: t('about.glance.projects') },
+      { value: clients.length,                                                label: t('about.glance.clients') },
+      { value: all.filter(function (p) { return hasTag(p, 'flutter'); }).length, label: t('about.glance.apps') },
+      { value: all.filter(function (p) { return hasTag(p, 'npm'); }).length,     label: t('about.glance.npm') },
+      { value: profile.githubSince || null,                                   label: t('about.glance.github'), flip: true },
+    ];
+
+    host.innerHTML = stats.filter(function (st) { return st.value; }).map(function (st) {
+      // "on GitHub since 2016" reads label-first; the rest number-first.
+      var num = '<span class="hud-num">' + st.value + '</span>';
+      var lab = '<span class="hud-label">' + st.label + '</span>';
+      return '<li class="hud-stat' + (st.flip ? ' hud-stat--flip' : '') + '">' + (st.flip ? lab + num : num + lab) + '</li>';
+    }).join('');
   }
 
   /* ---------- Render: timeline ---------- */
