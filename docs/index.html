@@ -184,30 +184,70 @@
         <article class="about-card">
           <h3 class="about-h" data-i18n="about.bio.title">The short version</h3>
           <p data-i18n="about.bio.p1">
-            I'm a full-stack software engineer with <strong>5+ years</strong> designing and shipping
-            web, mobile and cloud-based products. I specialize in <strong>Node.js</strong>,
-            <strong>TypeScript</strong>, <strong>React</strong>, <strong>Flutter</strong>,
-            <strong>MongoDB</strong> and <strong>AWS/DigitalOcean</strong>.
+            I build the backend and everything around it: <strong>APIs</strong>, <strong>realtime</strong>,
+            <strong>integrations</strong> with third-party services and the servers it all runs on.
+            What I enjoy most is wiring together things that were never meant to talk to each other,
+            from a GPS tracker over raw TCP to an electronic lock behind a REST API.
           </p>
           <p data-i18n="about.bio.p2">
-            I care about backend architecture, integrations, automation and performance,
-            and I lean on AI-assisted workflows every day to move faster without cutting
-            corners on quality.
+            These days I also lead a small team, keep a few clients' domains and servers online, and
+            use AI-assisted workflows daily to move faster without cutting corners on quality.
           </p>
         </article>
 
+        <!-- Dated on purpose: when this goes stale it should look stale. -->
         <article class="about-card">
-          <h3 class="about-h" data-i18n="about.now.title">What I'm on right now</h3>
+          <h3 class="about-h">
+            <span data-i18n="about.now.title">Right now</span>
+            <span class="about-stamp" data-i18n="about.now.stamp">// Sep 2026</span>
+          </h3>
           <ul class="dot-list">
-            <li data-i18n="about.now.item1">Building <strong>Whole Bible Community</strong> @ Higher Honduras · social platform for web + mobile.</li>
-            <li data-i18n="about.now.item2">Real-time messaging, media processing (FFmpeg, RabbitMQ) and content delivery.</li>
-            <li data-i18n="about.now.item3">Publishing releases to Apple App Store and Google Play.</li>
+            <li data-i18n="about.now.lead">Tech lead on <strong>Whole Bible Community</strong> at Higher Honduras: web, mobile and the video pipeline behind it.</li>
             <li data-i18n="about.now.jaw9">Also cooking up something new at <a href="https://jaw9.dev" target="_blank" rel="noopener"><strong>jaw9.dev</strong></a>. Stay tuned. 🍳</li>
-            <li data-i18n="about.now.item4">Improving my English (B2) and my Rust 🦀.</li>
+            <li data-i18n="about.now.learn">Sharpening my English every day with US teams, and my Rust 🦀 on the side.</li>
           </ul>
         </article>
 
-        <article class="about-card about-card--wide">
+        <!-- Player stats. The numbers come from data.js (main.js counts the
+             projects, clients, apps and packages), so they age on their own. -->
+        <article class="about-card about-card--wide about-card--hud">
+          <h3 class="about-h">
+            <span data-i18n="about.glance.title">At a glance</span>
+            <span class="about-stamp" data-i18n="about.glance.kicker">// player stats</span>
+          </h3>
+          <ul class="hud" id="glance" aria-label="Stats"></ul>
+        </article>
+
+        <article class="about-card">
+          <h3 class="about-h" data-i18n="about.remote.title">For remote teams</h3>
+          <ul class="fact-list">
+            <li>
+              <span class="k" data-i18n="about.remote.k.base">Base</span>
+              <span data-i18n="about.remote.v.base">Tegucigalpa, Honduras 🇭🇳</span>
+            </li>
+            <li>
+              <span class="k" data-i18n="about.remote.k.tz">Time zone</span>
+              <span data-i18n="about.remote.v.tz">GMT-6 · no daylight saving</span>
+            </li>
+            <li>
+              <span class="k" data-i18n="about.remote.k.lang">Languages</span>
+              <span data-i18n="about.remote.v.lang">Spanish (native) · English (every day)</span>
+            </li>
+            <li>
+              <span class="k" data-i18n="about.remote.k.work">Work</span>
+              <span data-i18n="about.remote.v.work">Remote, with teams in the US and Honduras</span>
+            </li>
+            <li class="fact-open">
+              <span class="k" data-i18n="about.remote.k.status">Status</span>
+              <span>
+                <span class="badge-open" data-i18n="about.remote.badge">OPEN</span>
+                <span data-i18n="about.remote.v.status">to remote consulting and contract work · <a href="#contact">say hi</a></span>
+              </span>
+            </li>
+          </ul>
+        </article>
+
+        <article class="about-card">
           <h3 class="about-h" data-i18n="about.love.title">Things I love</h3>
           <ul class="chip-list">
             <li class="chip chip--purple" data-i18n="about.love.linux">GNU/Linux</li>

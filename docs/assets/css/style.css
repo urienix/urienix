@@ -632,6 +632,10 @@ main { position: relative; z-index: 10; }
 }
 .about-card--wide { grid-column: 1 / -1; }
 .about-h {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 12px;
   margin: 0 0 14px;
   font-family: var(--label-family);
   font-size: 13px;
@@ -639,6 +643,112 @@ main { position: relative; z-index: 10; }
   text-transform: uppercase;
   letter-spacing: 0.14em;
   color: var(--pink);
+}
+/* A date or kicker riding on a card heading, in the section-kicker voice. */
+.about-stamp {
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+
+/* Player stats: a strip of number + label tiles. */
+.about-card--hud { padding-bottom: 18px; }
+.hud {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.hud-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 14px 12px;
+  background: rgba(20,20,27,0.55);
+  border: 1px solid rgba(184,184,196,0.18);
+  border-radius: 6px;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.hud-stat:hover {
+  transform: translate(-2px,-2px);
+  border-color: var(--purple);
+  box-shadow: var(--px) var(--px) 0 var(--brand-dim);
+}
+.hud-num {
+  font-family: "Press Start 2P", monospace;
+  font-size: clamp(16px, 2vw, 20px);
+  line-height: 1;
+  color: var(--cyan);
+  text-shadow: 0 0 16px rgba(128,255,234,0.35);
+}
+.hud-label {
+  font-family: var(--label-family);
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  line-height: 1.4;
+}
+.hud-stat--flip .hud-num { color: var(--yellow); text-shadow: 0 0 16px rgba(241,250,140,0.3); }
+
+/* Facts for remote teams: the same key / value rows as the contact card. */
+.fact-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 13.5px;
+}
+.fact-list li {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  padding: 9px 12px;
+  background: rgba(20,20,27,0.5);
+  border: 1px dashed rgba(184,184,196,0.2);
+  line-height: 1.5;
+}
+.fact-list .k {
+  flex: none;
+  min-width: 96px;
+  font-family: var(--label-family);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--muted);
+  letter-spacing: 0.14em;
+}
+.fact-open { border-color: rgba(138,255,128,0.4); }
+.badge-open {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 2px 7px;
+  font-family: var(--label-family);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--ink);
+  background: var(--green);
+  border-radius: 3px;
+  box-shadow: 0 0 14px rgba(138,255,128,0.35);
+  animation: pulse-open 2.4s ease-in-out infinite;
+}
+@keyframes pulse-open {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(138,255,128,0.55); }
+  50%      { box-shadow: 0 0 0 6px rgba(138,255,128,0); }
+}
+.fact-list a { color: var(--cyan); text-decoration: underline dotted; text-underline-offset: 3px; }
+.fact-list a:hover { color: var(--pink); }
+@media (max-width: 560px) {
+  .hud { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 480px) {
+  .fact-list li { flex-direction: column; gap: 4px; }
 }
 .about-card p { margin: 0 0 10px; font-size: 14.5px; line-height: 1.8; color: var(--text); }
 .about-card strong { color: var(--cyan); font-weight: 600; }
@@ -906,11 +1016,10 @@ button.skill-chip.is-primary:focus-visible {
   border: 1px solid var(--edge);
   border-radius: 3px;
   box-shadow: 4px 4px 0 rgba(0,0,0,0.35);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-4px);
+  /* display, not visibility: a hidden-but-laid-out tip past the right edge
+     still widens the page's scrollable area in Chromium. */
+  display: none;
   pointer-events: none;
-  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0s linear 0.15s;
 }
 .skill-tip::before {
   content: "";
@@ -926,11 +1035,17 @@ button.skill-chip.is-primary:focus-visible {
 }
 button.skill-chip:hover .skill-tip,
 button.skill-chip:focus-visible .skill-tip {
-  opacity: 1;
-  visibility: visible;
-  transform: none;
-  transition-delay: 0s;
+  display: block;
+  animation: tip-in 0.15s ease both;
 }
+@keyframes tip-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: none; }
+}
+/* Chips near the right edge hang their tip from the right corner instead,
+   so it stays on screen. main.js sets the class as the pointer arrives. */
+.skill-chip.tip-left .skill-tip { left: auto; right: 0; }
+.skill-chip.tip-left .skill-tip::before { left: auto; right: 12px; }
 @media (hover: none) {
   .skill-tip { display: none; }
 }

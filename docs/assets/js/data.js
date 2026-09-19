@@ -4,6 +4,13 @@
    ============================================================ */
 
 window.URIENIX_DATA = {
+  /* Feeds the "At a glance" stats in About. Years are counted from
+     careerSince, so the number grows on its own each January. */
+  profile: {
+    careerSince: 2019,
+    githubSince: 2016,
+  },
+
   jobs: [
     {
       id: 'higher',
