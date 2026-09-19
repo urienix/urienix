@@ -222,7 +222,7 @@
       var tags = tagsHtml(p.tags);
 
       card.innerHTML =
-        '<div class="project-media">' + projectMediaHtml(p) + '</div>' +
+        '<div class="project-media' + (p.plate ? ' project-media--plate' : '') + '">' + projectMediaHtml(p) + '</div>' +
         '<div class="project-body">' +
           kicker +
           '<h3 class="project-title">' + p.name + '</h3>' +
@@ -299,7 +299,7 @@
 
     modal.body.innerHTML =
       '<header class="pm-hero">' +
-        '<div class="pm-logo">' + projectMediaHtml(p) + '</div>' +
+        '<div class="pm-logo' + (p.plate ? ' pm-logo--plate' : '') + '">' + projectMediaHtml(p) + '</div>' +
         '<div class="pm-heading">' +
           '<p class="pm-kicker">' + kicker + '</p>' +
           '<h2 class="pm-title" id="pm-title">' + p.name + '</h2>' +

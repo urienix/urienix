@@ -156,6 +156,9 @@ window.URIENIX_DATA = {
        img      logo path. Leave it out and the card shows a pixel monogram
                 built from `mono` (initials) in the `accent` color. Drop the
                 real logo in assets/img and add `img:` to swap it in.
+       plate    true puts a white rounded plate behind the logo, for artwork
+                that is dark on transparent or comes with its own white
+                background.
        status   'live' (default) · 'internal' · 'offline' · 'advisory'.
                 Anything but live prints a small note instead of a link.
        href     public link, when there is one. `cta` labels the button.
@@ -175,6 +178,7 @@ window.URIENIX_DATA = {
         name: 'Whole Bible Community',
         client: 'Higher Honduras',
         role: { en: 'Tech Lead', es: 'Tech Lead' },
+        img: 'assets/img/wbc-logo.svg',
         mono: 'WB',
         accent: 'purple',
         href: 'https://wholebiblecommunity.com',
@@ -237,6 +241,7 @@ window.URIENIX_DATA = {
         name: 'Dalamar Homes',
         client: 'Higher Honduras',
         role: { en: 'Project coordinator', es: 'Coordinador de proyecto' },
+        img: 'assets/img/dalamarhomes.webp',
         mono: 'DH',
         accent: 'cyan',
         href: 'https://dalamarhomes.com',
@@ -286,6 +291,8 @@ window.URIENIX_DATA = {
         name: 'HomeV',
         client: 'Higher Honduras',
         role: { en: 'Project coordinator', es: 'Coordinador de proyecto' },
+        img: 'assets/img/homev.webp',
+        plate: true,                  // black logo, needs a light backdrop
         mono: 'HV',
         accent: 'green',
         href: 'https://homev.biz',
@@ -331,6 +338,8 @@ window.URIENIX_DATA = {
         name: 'El Global News',
         client: 'Higher Honduras',
         role: { en: 'Coordination & infra', es: 'Coordinación e infra' },
+        img: 'assets/img/elglobalnews.png',
+        plate: true,                  // navy on transparent
         mono: 'EG',
         accent: 'pink',
         href: 'https://elglobal.news',
@@ -380,6 +389,7 @@ window.URIENIX_DATA = {
         name: 'Lodging App',
         client: 'Sullivan Capital',
         role: { en: 'Full-stack developer', es: 'Desarrollador full-stack' },
+        img: 'assets/img/lodging-app.svg',
         mono: 'LA',
         accent: 'yellow',
         status: 'internal',
@@ -436,6 +446,7 @@ window.URIENIX_DATA = {
         name: 'CLVHH Home Health Care',
         client: 'Sullivan Capital',
         role: { en: 'Full-stack developer', es: 'Desarrollador full-stack' },
+        img: 'assets/img/clvhh-app.svg',
         mono: 'CL',
         accent: 'purple',
         status: 'internal',
@@ -486,6 +497,7 @@ window.URIENIX_DATA = {
         name: 'Smart Driver',
         client: 'Grupo Incova / Mantun',
         role: { en: 'Full-stack developer', es: 'Desarrollador full-stack' },
+        img: 'assets/img/smartdriver-logo.png',
         mono: 'SD',
         accent: 'cyan',
         status: 'internal',
@@ -592,6 +604,8 @@ window.URIENIX_DATA = {
         name: 'VirtualMoore HN',
         client: 'Moore Honduras',
         role: { en: 'Consultant & platform admin', es: 'Consultor y administrador' },
+        img: 'assets/img/virtualmoore.jpg',
+        plate: true,                  // opaque white jpg, the plate hides the edges
         mono: 'VM',
         accent: 'yellow',
         status: 'offline',
@@ -642,12 +656,14 @@ window.URIENIX_DATA = {
         name: 'Seguros Innova',
         client: 'Seguros Innova HN',
         role: { en: 'External consultant', es: 'Consultor externo' },
+        img: 'assets/img/seguros-innova.jpg',
+        plate: true,                  // opaque white jpg
         mono: 'SI',
         accent: 'pink',
         status: 'advisory',
         desc: {
-          en: 'Domain management and Google Workspace email for an insurance company, plus basic security advisory.',
-          es: 'Gestión de dominio y correo en Google Workspace para una aseguradora, más asesoría básica de seguridad.',
+          en: 'Domain management and Google Workspace email for an insurance brokerage, plus basic security advisory.',
+          es: 'Gestión de dominio y correo en Google Workspace para una correduría de seguros, más asesoría básica de seguridad.',
         },
         tags: ['Google Workspace', 'DNS', 'Security'],
         stack: ['Google Workspace', 'DNS · domain', 'Account security'],

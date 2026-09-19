@@ -860,7 +860,21 @@ main { position: relative; z-index: 10; }
   height: 160px;
   border-bottom: 1px solid var(--edge);
 }
-.project-media img { max-height: 120px; max-width: 100%; object-fit: contain; }
+.project-media img { height: 120px; width: auto; max-width: 100%; object-fit: contain; }
+
+/* Plate: a white rounded backdrop hugging the logo, for dark-on-transparent
+   artwork and for files that ship with their own white background. Sized by
+   the image (not a fixed height) so the plate wraps the logo, not the slot. */
+.project-media--plate img,
+.pm-logo--plate img {
+  height: auto;
+  max-height: 120px;
+  padding: 10px 14px;
+  background: #fff;
+  border-radius: 6px;
+}
+.pm-logo--plate { background: #fff; }
+.pm-logo--plate img { padding: 0; height: 66px; }
 
 /* Stand-in logo: the project's initials in a dashed pixel frame, used until
    the real artwork lands in assets/img. Colour comes from `accent` in data.js. */
@@ -1127,17 +1141,24 @@ body.crt-off .pm-window::after { display: none; }
   margin-bottom: 18px;
   border-bottom: 1px dashed rgba(184,184,196,0.2);
 }
+/* Fixed height, width follows the artwork: a square mark stays a square box,
+   a wide wordmark gets room to be read instead of shrinking into a corner.
+   The image height is a plain pixel value on purpose: a percentage would
+   resolve against the grid row, which Firefox treats as auto and ignores,
+   leaving the artwork at its natural size and spilling out of the box. */
 .pm-logo {
   flex: none;
   display: grid;
   place-items: center;
-  width: 84px; height: 84px;
+  height: 84px;
+  min-width: 84px;
   padding: 8px;
   background: linear-gradient(135deg, #282A36, #14141B);
   border: 1px solid var(--edge);
   border-radius: 8px;
+  overflow: hidden;
 }
-.pm-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.pm-logo img { height: 66px; width: auto; max-width: 164px; object-fit: contain; }
 .pm-logo .project-mono { width: 64px; height: 64px; font-size: 16px; }
 .pm-logo .project-mono::after { right: -5px; bottom: -5px; width: 8px; height: 8px; }
 .pm-heading { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
@@ -1218,7 +1239,9 @@ body.crt-off .pm-window::after { display: none; }
   .pm-body { padding: 18px 16px 4px; }
   .pm-foot { padding: 12px 16px; }
   .pm-hero { gap: 14px; }
-  .pm-logo { width: 64px; height: 64px; padding: 6px; }
+  .pm-logo { height: 64px; min-width: 64px; padding: 6px; }
+  .pm-logo img,
+  .pm-logo--plate img { height: 50px; max-width: 112px; }
   .pm-logo .project-mono { width: 48px; height: 48px; font-size: 12px; }
   .pm-foot .project-btn { flex: 1 1 auto; justify-content: center; }
 }
