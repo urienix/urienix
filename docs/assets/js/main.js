@@ -1,8 +1,8 @@
 /* ============================================================
    Urienix — main.js
    i18n · glance stats · timeline & projects render · project details
-   modal · skills chips & project highlight · bubbles · glitch ·
-   scrollspy · reveal · CRT toggle · coin toss · terminal typing
+   modal · skills chips & project highlight · copy email · bubbles ·
+   glitch · scrollspy · reveal · CRT toggle · coin toss · terminal typing
    ============================================================ */
 
 (function () {
@@ -86,6 +86,12 @@
       $$('[data-set-lang]').forEach(function (btn) {
         btn.setAttribute('aria-pressed', String(btn.getAttribute('data-set-lang') === lang));
       });
+
+      // The mail subject travels with the language too.
+      var mail = $('#contact-mail');
+      if (mail) {
+        mail.href = mail.href.replace(/\?.*$/, '') + '?subject=' + encodeURIComponent(t('contact.subject'));
+      }
 
       renderGlance();
       renderTimeline();
@@ -587,6 +593,69 @@
     });
   }
 
+  /* ---------- Copy email ----------
+     Plenty of desktops have no mail client behind mailto:, so the address
+     can be copied outright. The async Clipboard API first; failing that,
+     the old execCommand route through a throwaway textarea; failing both,
+     the address in the list gets selected so one keystroke finishes the
+     job. The button says what happened, for a couple of seconds. */
+
+  function initCopyEmail () {
+    var btn = $('#copy-email');
+    if (!btn) return;
+
+    var label = $('.copy-label', btn);
+    var email = btn.getAttribute('data-email');
+    var timer = null;
+
+    function report (key, ok) {
+      btn.classList.toggle('is-copied', ok);
+      if (label) label.textContent = t(key);
+      window.clearTimeout(timer);
+      timer = window.setTimeout(function () {
+        btn.classList.remove('is-copied');
+        if (label) label.textContent = t('contact.cta.copy');
+      }, 2200);
+    }
+
+    function selectVisible () {
+      var el = $('#contact-email');
+      if (!el || !window.getSelection) return;
+      var range = document.createRange();
+      range.selectNodeContents(el);
+      var sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+    }
+
+    function legacyCopy () {
+      var ta = document.createElement('textarea');
+      ta.value = email;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      document.body.removeChild(ta);
+      if (ok) { report('contact.cta.copied', true); return; }
+      selectVisible();
+      report('contact.cta.copyFail', false);
+    }
+
+    on(btn, 'click', function () {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(
+          function () { report('contact.cta.copied', true); },
+          legacyCopy
+        );
+      } else {
+        legacyCopy();
+      }
+    });
+  }
+
   /* ---------- Bubbles ---------- */
 
   function initBubbles () {
@@ -865,6 +934,7 @@
     initCoinToss();
     initProjectModal();
     initSkillFilter();
+    initCopyEmail();
     initYear();
 
     // If the URL loaded with a hash, browsers usually scroll for us — but they
