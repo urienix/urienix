@@ -106,7 +106,7 @@ window.URIENIX_I18N = {
 
     'contact.title':  'Contact',
     'contact.kicker': "// let's build something",
-    'contact.lead':   'Building something and need a backend, an integration or a hand leading a small team? Or just want to say hi. Either way, my inbox is open.',
+    'contact.lead':   'Building something and need a backend or an integration? Or just want to say hi. Either way, my inbox is open.',
     'contact.subject':'Hi from urienix.moe',
     'contact.cta.mail':    'Email me',
     'contact.cta.copy':    'Copy address',
@@ -229,7 +229,7 @@ window.URIENIX_I18N = {
 
     'contact.title':  'Contacto',
     'contact.kicker': '// construyamos algo',
-    'contact.lead':   '¿Estás construyendo algo y necesitas un backend, una integración o una mano llevando un equipo pequeño? ¿O solo quieres saludar? En cualquier caso, mi bandeja está abierta.',
+    'contact.lead':   '¿Estás construyendo algo y necesitas un backend o una integración? ¿O solo quieres saludar? En cualquier caso, mi bandeja está abierta.',
     'contact.subject':'Hola desde urienix.moe',
     'contact.cta.mail':    'Escríbeme',
     'contact.cta.copy':    'Copiar correo',
