@@ -315,11 +315,12 @@ body.crt-off::after {
 
 main { position: relative; z-index: 10; }
 
+/* No scroll-margin here: html already sets scroll-padding-top to the nav
+   height, and the two would add up to a 128px gap under the nav. */
 .section {
   padding: clamp(64px, 10vh, 120px) clamp(18px, 5vw, 48px);
   max-width: 1180px;
   margin: 0 auto;
-  scroll-margin-top: var(--nav-h);
 }
 
 .section-head {
