@@ -371,7 +371,7 @@
      focus back on the button that opened it, and repaint the contents when
      the language changes while it is open. */
 
-  var modal = { el: null, body: null, foot: null, path: null, id: null, openerId: null };
+  var modal = { el: null, body: null, foot: null, path: null, id: null, opener: null, openerScope: null };
 
   function renderProjectModal () {
     if (!modal.el || !modal.id) return;
@@ -434,10 +434,14 @@
       '</button>';
   }
 
-  function openProject (id) {
+  function openProject (id, opener) {
     if (!modal.el || !findProject(id)) return;
     modal.id = id;
-    modal.openerId = id;
+    // Remember who opened it, and the section it lives in: the same project id
+    // is also a chip in the Career timeline, so a page-wide lookup on close
+    // could land the focus (and the scroll) somewhere else entirely.
+    modal.opener = opener || null;
+    modal.openerScope = (opener && opener.closest && opener.closest('section')) || document;
     renderProjectModal();
 
     document.body.classList.add('modal-open');
@@ -451,13 +455,19 @@
 
   function afterProjectClose () {
     document.body.classList.remove('modal-open');
-    modal.id = null;
+    var id    = modal.id;
+    var btn   = modal.opener;
+    var scope = modal.openerScope || document;
+    modal.id = modal.opener = modal.openerScope = null;
 
     // The cards may have been re-rendered while the modal was open (language
-    // switch), so look the button up again instead of trusting an old node.
-    var btn = modal.openerId && $('[data-project="' + modal.openerId + '"]');
-    modal.openerId = null;
-    if (btn && btn.focus) btn.focus();
+    // switch); if the old node is gone, find its replacement in the same
+    // section. The opener was on screen when it was clicked, so there is
+    // nothing to scroll to: preventScroll keeps the page exactly where it was.
+    if (!btn || !document.contains(btn)) {
+      btn = id ? $('[data-project="' + id + '"]', scope) : null;
+    }
+    if (btn && btn.focus) btn.focus({ preventScroll: true });
   }
 
   function closeProject () {
@@ -484,7 +494,7 @@
       if (!target || !target.closest) return;
 
       var opener = target.closest('[data-project]');
-      if (opener) { openProject(opener.getAttribute('data-project')); return; }
+      if (opener) { openProject(opener.getAttribute('data-project'), opener); return; }
 
       if (target.closest('[data-modal-close]')) closeProject();
     });
