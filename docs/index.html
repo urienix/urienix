@@ -28,13 +28,14 @@
   <link rel="icon" type="image/x-icon" href="./favicon.ico" />
   <link rel="apple-touch-icon" href="./assets/img/urienix.png" />
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=JetBrains+Mono:wght@400;500;700&display=swap"
-    rel="stylesheet"
-  />
+  <!-- Tipografias propias. Antes venian del CDN de Google, que recibia la IP
+       de cada visitante antes incluso de que el banner preguntara; ahora salen
+       del mismo dominio. Se precargan los dos subconjuntos latinos, que son
+       los que pinta cualquier carga; los "latin-ext" quedan para los acentos
+       que no entran ahi. crossorigin es obligatorio incluso en mismo origen:
+       sin el, el navegador descarga la fuente dos veces. -->
+  <link rel="preload" href="./assets/fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="./assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
 
   <!-- Marca que hay JS antes de que cargue nada mas. La terminal se escribe
        sola, y sin esto sus lineas asomarian enteras hasta que main.js
@@ -385,12 +386,35 @@
 
   </main>
 
+  <!-- Consentimiento. No es modal a proposito: nada se carga hasta que hay
+       respuesta, asi que no hace falta atrapar el foco ni tapar la pagina.
+       Empieza oculto; consent.js lo muestra solo si no hay decision previa. -->
+  <aside id="consent-banner" class="consent" role="dialog" aria-modal="false"
+         aria-labelledby="consent-title" tabindex="-1" hidden>
+    <h2 id="consent-title" class="consent-title" data-i18n="consent.title">Analytics?</h2>
+    <p class="consent-text" data-i18n="consent.text">
+      I would like to use Google Analytics to see which pages get read. It sets
+      cookies and sends your IP address to Google. Nothing loads until you say yes,
+      and saying no keeps the site working exactly the same.
+    </p>
+    <div class="consent-actions">
+      <button type="button" class="consent-btn consent-btn--yes" data-consent="accept"
+              data-i18n="consent.accept">Accept</button>
+      <button type="button" class="consent-btn" data-consent="reject"
+              data-i18n="consent.reject">Reject</button>
+    </div>
+  </aside>
+
   <footer class="site-footer">
     <span>© <span id="year">2026</span> Urienix</span>
     <span class="dot" aria-hidden="true">·</span>
     <span data-i18n="footer.made">Made with 💜 &amp; coffee ☕</span>
     <span class="dot" aria-hidden="true">·</span>
     <a href="https://github.com/urienix/urienix" target="_blank" rel="noopener" data-i18n="footer.source">Source</a>
+    <span class="dot" aria-hidden="true">·</span>
+    <!-- Cambiar de idea tiene que costar lo mismo que decir que si. -->
+    <button type="button" class="footer-link" data-consent="reopen"
+            data-i18n="footer.cookies" hidden>Cookies</button>
   </footer>
 
   <!-- Project details. A native <dialog>: Esc closes it, focus stays inside
@@ -418,5 +442,6 @@
   <script src="./assets/js/data.js"></script>
   <script src="./assets/js/i18n.js"></script>
   <script src="./assets/js/main.js"></script>
+  <script src="./assets/js/consent.js"></script>
 </body>
 </html>

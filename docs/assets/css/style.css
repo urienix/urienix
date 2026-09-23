@@ -1,3 +1,61 @@
+/* ---------- Tipografias ----------
+   Auto-hospedadas a proposito. Servirlas desde el CDN de Google enviaba la IP
+   de cada visitante a un tercero antes de que el banner de consentimiento
+   llegara siquiera a aparecer, lo que hacia falsa su promesa de que no se
+   carga nada sin permiso. Con los .woff2 en el propio dominio, esa frase es
+   cierta. Los cuatro archivos pesan 64 KB.
+
+   JetBrains Mono viene como fuente variable (100-800), asi que un solo
+   archivo por subconjunto cubre los pesos 400, 500, 600 y 700 que usa la
+   hoja. El CDN solo servia 400, 500 y 700: el 600 se sintetizaba.
+
+   Ambas familias son SIL Open Font License 1.1. Las licencias viajan con los
+   archivos en assets/fonts/, como exige la propia OFL. */
+
+@font-face {
+  font-family: "Press Start 2P";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/press-start-2p-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+                 U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+                 U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Press Start 2P";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/press-start-2p-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+                 U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF,
+                 U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url("../fonts/jetbrains-mono-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+                 U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+                 U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url("../fonts/jetbrains-mono-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+                 U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF,
+                 U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
 /* ============================================================
    Urienix — Personal site
    Palette: Dracula (#14141B ink · #BD93F9 purple · #80FFEA cyan
@@ -1744,6 +1802,107 @@ body.crt-off .pm-window::after { display: none; }
   letter-spacing: 0.14em;
 }
 @media (max-width: 560px) { .contact-list { grid-template-columns: 1fr; } }
+
+/* ---------- Consentimiento ----------
+   Abajo y a un lado, no centrado ni a pantalla completa: nada se carga
+   hasta que hay respuesta, asi que el banner no necesita bloquear la
+   pagina para hacer su trabajo. Los dos botones pesan lo mismo y
+   rechazar cuesta un clic, igual que aceptar. */
+
+.consent {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 90;
+  max-width: 420px;
+  padding: 18px 20px 20px;
+  background: rgba(31, 31, 42, 0.97);
+  border: 1px solid var(--edge);
+  border-radius: 6px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.consent[hidden] { display: none; }
+.consent:focus { outline: none; }
+
+.consent-title {
+  margin: 0 0 8px;
+  font-family: "Press Start 2P", monospace;
+  font-size: 11px;
+  line-height: 1.6;
+  letter-spacing: 0.06em;
+  color: var(--purple);
+}
+
+.consent-text {
+  margin: 0 0 16px;
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.consent-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.consent-btn {
+  flex: 1 1 auto;
+  padding: 10px 16px;
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--edge);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.consent-btn:hover { border-color: var(--purple); }
+
+.consent-btn--yes {
+  color: var(--ink);
+  background: var(--purple);
+  border-color: var(--purple);
+}
+
+.consent-btn--yes:hover {
+  background: var(--purple);
+  border-color: var(--text);
+}
+
+.consent-btn:focus-visible,
+.footer-link:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 3px;
+}
+
+/* Reabrir el banner desde el pie. Es un boton porque no navega a
+   ninguna parte, pero se lee como el resto de enlaces del pie. */
+.footer-link {
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.footer-link:hover { color: var(--purple); }
+
+@media (max-width: 480px) {
+  .consent { left: 12px; right: 12px; bottom: 12px; padding: 16px; }
+}
 
 /* ---------- Footer ---------- */
 

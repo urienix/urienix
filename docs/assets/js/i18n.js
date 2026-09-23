@@ -17,6 +17,12 @@ window.URIENIX_I18N = {
 
     'tools.crt':    'Toggle CRT effect',
 
+    'consent.title':  'Analytics?',
+    'consent.text':   'I would like to use Google Analytics to see which pages get read. It sets cookies and sends your IP address to Google. Nothing loads until you say yes, and saying no keeps the site working exactly the same.',
+    'consent.accept': 'Accept',
+    'consent.reject': 'Reject',
+    'footer.cookies': 'Cookies',
+
     'hero.role':   'Software Engineer · Backend & Integrations',
     'hero.line1':  "Hi! I'm Jairo Medrano, also known as Urienix.",
     'hero.line2':  "I build backends and what's around them: APIs, realtime, integrations.",
@@ -152,6 +158,12 @@ window.URIENIX_I18N = {
     'nav.contact':  'Contacto',
 
     'tools.crt':    'Activar efecto CRT',
+
+    'consent.title':  '¿Analítica?',
+    'consent.text':   'Me gustaría usar Google Analytics para ver qué páginas se leen. Pone cookies y envía tu dirección IP a Google. No se carga nada hasta que digas que sí, y decir que no deja el sitio funcionando igual.',
+    'consent.accept': 'Aceptar',
+    'consent.reject': 'Rechazar',
+    'footer.cookies': 'Cookies',
 
     'hero.role':   'Ingeniero de Software · Backend e Integraciones',
     'hero.line1':  '¡Hola! Soy Jairo Medrano, también conocido como Urienix.',
