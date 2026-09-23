@@ -48,13 +48,14 @@
        hace que cada visita se cuente dos veces. Google entrega los
        dos fragmentos porque no sabe cual vas a usar, no para que
        pegues ambos. */
-    mode: 'gtm',
+    mode: 'gtag',
 
-    /* GA4 directo. Vacio: aqui la etiqueta de GA4 se configura DENTRO
-       del contenedor, no desde el sitio. */
-    measurementId: '',
+    /* GA4 directo. El ID del flujo de datos de urienix.moe. */
+    measurementId: 'G-SHY7QFSKDR',
 
-    /* Contenedor de Google Tag Manager. */
+    /* Contenedor de Google Tag Manager. Solo se usa con mode 'gtm'.
+       Se conserva por si algun dia hace falta: cambiar de modo es
+       cambiar la linea de arriba, nada mas. */
     gtmId: 'GTM-NSLZ4J2V',
 
     /* Publicidad. En false, aceptar habilita solo medicion: las
