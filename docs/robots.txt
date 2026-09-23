@@ -1,3 +1,9 @@
+# urienix.moe
 User-agent: *
 Allow: /
+
+# El alojamiento sirve todos los archivos del repositorio, y el README es
+# documentacion del proyecto, no contenido del sitio.
+Disallow: /README.md
+
 Sitemap: https://urienix.moe/sitemap.xml
