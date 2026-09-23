@@ -28,13 +28,14 @@
   <link rel="icon" type="image/x-icon" href="./favicon.ico" />
   <link rel="apple-touch-icon" href="./assets/img/urienix.png" />
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=JetBrains+Mono:wght@400;500;700&display=swap"
-    rel="stylesheet"
-  />
+  <!-- Tipografias propias. Antes venian del CDN de Google, que recibia la IP
+       de cada visitante antes incluso de que el banner preguntara; ahora salen
+       del mismo dominio. Se precargan los dos subconjuntos latinos, que son
+       los que pinta cualquier carga; los "latin-ext" quedan para los acentos
+       que no entran ahi. crossorigin es obligatorio incluso en mismo origen:
+       sin el, el navegador descarga la fuente dos veces. -->
+  <link rel="preload" href="./assets/fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="./assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
 
   <!-- Marca que hay JS antes de que cargue nada mas. La terminal se escribe
        sola, y sin esto sus lineas asomarian enteras hasta que main.js
