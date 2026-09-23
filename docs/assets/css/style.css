@@ -1803,6 +1803,107 @@ body.crt-off .pm-window::after { display: none; }
 }
 @media (max-width: 560px) { .contact-list { grid-template-columns: 1fr; } }
 
+/* ---------- Consentimiento ----------
+   Abajo y a un lado, no centrado ni a pantalla completa: nada se carga
+   hasta que hay respuesta, asi que el banner no necesita bloquear la
+   pagina para hacer su trabajo. Los dos botones pesan lo mismo y
+   rechazar cuesta un clic, igual que aceptar. */
+
+.consent {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 90;
+  max-width: 420px;
+  padding: 18px 20px 20px;
+  background: rgba(31, 31, 42, 0.97);
+  border: 1px solid var(--edge);
+  border-radius: 6px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.consent[hidden] { display: none; }
+.consent:focus { outline: none; }
+
+.consent-title {
+  margin: 0 0 8px;
+  font-family: "Press Start 2P", monospace;
+  font-size: 11px;
+  line-height: 1.6;
+  letter-spacing: 0.06em;
+  color: var(--purple);
+}
+
+.consent-text {
+  margin: 0 0 16px;
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.consent-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.consent-btn {
+  flex: 1 1 auto;
+  padding: 10px 16px;
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--edge);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.consent-btn:hover { border-color: var(--purple); }
+
+.consent-btn--yes {
+  color: var(--ink);
+  background: var(--purple);
+  border-color: var(--purple);
+}
+
+.consent-btn--yes:hover {
+  background: var(--purple);
+  border-color: var(--text);
+}
+
+.consent-btn:focus-visible,
+.footer-link:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 3px;
+}
+
+/* Reabrir el banner desde el pie. Es un boton porque no navega a
+   ninguna parte, pero se lee como el resto de enlaces del pie. */
+.footer-link {
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.footer-link:hover { color: var(--purple); }
+
+@media (max-width: 480px) {
+  .consent { left: 12px; right: 12px; bottom: 12px; padding: 16px; }
+}
+
 /* ---------- Footer ---------- */
 
 .site-footer {
