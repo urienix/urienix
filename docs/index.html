@@ -14,6 +14,15 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://urienix.moe/" />
+
+  <!-- Una sola URL canonica: sin esto, urienix.moe, www.urienix.moe y las
+       variantes ?lang= se reparten la misma pagina entre varias direcciones.
+       Y hreflang declara que el sitio existe en los dos idiomas, que hasta
+       ahora ningun buscador tenia forma de saber. -->
+  <link rel="canonical" href="https://urienix.moe/" />
+  <link rel="alternate" hreflang="en" href="https://urienix.moe/?lang=en" />
+  <link rel="alternate" hreflang="es" href="https://urienix.moe/?lang=es" />
+  <link rel="alternate" hreflang="x-default" href="https://urienix.moe/" />
   <meta property="og:title" content="Urienix · Jairo Medrano" />
   <meta property="og:description" content="Backend, realtime and integrations engineer. 7+ years shipping for teams in the US and Honduras." />
   <meta property="og:image" content="./assets/img/urienix.png" />
